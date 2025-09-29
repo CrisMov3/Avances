@@ -39,7 +39,6 @@ function showDetail(service) {
         navbar.classList.remove('scrolled');
       }
     });
-    <!-- OPTIONAL JS: animación al entrar en viewport -->
   (function(){
     const items = document.querySelectorAll('.why-item');
     if ('IntersectionObserver' in window){
@@ -59,4 +58,3 @@ function showDetail(service) {
       });
     }
   })();
-
