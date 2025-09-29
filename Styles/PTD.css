@@ -1,7 +1,6 @@
 /* ============================================= */
-/* ===== ESTILOS GLOBALES Y DE NAVEGACIÓN ===== */
+/* ===== ESTILOS GENERALES (NAVBAR, CTA, ETC.) ===== */
 /* ============================================= */
-
 * {
   margin: 0;
   padding: 0;
@@ -10,11 +9,19 @@
 
 body {
   font-family: 'Poppins', Arial, sans-serif;
-  background: #fdfdfd; 
+  background: #fdfbf7;
   color: #343a40;
 }
 
-/* ===== NAVBAR (Estilo consistente con las otras páginas) ===== */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
 header {
   width: 100%;
   position: fixed;
@@ -57,36 +64,95 @@ header {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  will-change: opacity, transform;
 }
 
-.logo img.logo--siglas { height: 72px; opacity: 1; transform: translateY(-50%) scale(1); z-index: 2; }
-.logo img.logo--full { height: 44px; opacity: 0; transform: translateY(-60%) scale(0.98); z-index: 1; }
-.navbar.scrolled .logo img.logo--siglas { opacity: 0; transform: translateY(-40%) scale(0.65); }
-.navbar.scrolled .logo img.logo--full { opacity: 1; transform: translateY(-50%) scale(1); }
+.logo img.logo--siglas {
+  height: 72px;
+  opacity: 1;
+}
 
-.nav-links { display: flex; gap: 30px; font-size: 15px; font-weight: 500; color: #444; flex: 1 1 auto; justify-content: center; list-style: none; }
-.nav-links a { position: relative; padding: 4px 0; text-decoration: none; color: inherit; }
-.nav-links a::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 0; height: 2px; background: #002b55; transition: width 0.3s ease; }
-.nav-links a:hover::after { width: 100%; }
+.logo img.logo--full {
+  height: 44px;
+  opacity: 0;
+}
 
-.cta { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; background: #042a63; color: #fff; border-radius: 999px; font-weight: 700; transition: all 0.25s ease; box-shadow: 0 6px 18px rgba(4, 42, 99, 0.18); border: 1px solid rgba(255,255,255,0.05); flex: 0 0 auto; margin-left: 16px; text-decoration: none; }
-.cta:hover { background: linear-gradient(90deg, #03306b, #012a5b); transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 26px rgba(4, 42, 99, 0.25); }
+.navbar.scrolled .logo img.logo--siglas {
+  opacity: 0;
+}
 
+.navbar.scrolled .logo img.logo--full {
+  opacity: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #444;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-links a {
+  position: relative;
+  padding: 4px 0;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: #002b55;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: #042a63;
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 18px rgba(4, 42, 99, 0.18);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.cta:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+.nav-links__cta-mobile,
+.hamburger-btn,
+.overlay {
+  display: none;
+}
 
 /* ============================================= */
-/* ===== DISEÑO DE LA PÁGINA DE POLÍTICAS    ===== */
+/* ===== ESTILOS ESPECÍFICOS DE LA PÁGINA    ===== */
 /* ============================================= */
 
+/* SOLUCIÓN: El main solo aparta el espacio para la navbar, sin padding extra ni altura fija. */
 main {
-  padding-top: 110px; /* Altura inicial del navbar */
+  padding-top: 110px;
 }
 
-/* Banner superior (Hero) */
+/* SOLUCIÓN: El banner (hero) tiene su propio padding y ocupa el 100% del ancho. */
 .policy-hero {
-  background: #28306e; /* Un azul oscuro y sobrio */
+  background: #28306e;
   color: #ffffff;
-  padding: 80px 40px;
+  padding: 60px 40px;
   text-align: center;
 }
 
@@ -105,17 +171,16 @@ main {
 }
 
 .hero-content strong {
-  color: rgba(255, 255, 255, 0.95);
+  color: #fff;
 }
 
-/* Contenedor principal del acordeón */
+/* SOLUCIÓN: Este contenedor centra el resto del contenido. */
 .policy-container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 60px 40px;
+  padding: 60px 20px;
 }
 
-/* Sección de contacto destacada */
 .contact-highlight {
   background: linear-gradient(120deg, #eef3fb, #fbfdff);
   border: 1px solid #dbe6f5;
@@ -125,11 +190,13 @@ main {
   margin-bottom: 50px;
   text-align: center;
 }
+
 .contact-content h3 {
   font-size: 1.8em;
   color: #042a63;
   margin-bottom: 15px;
 }
+
 .contact-content p {
   color: #333;
   line-height: 1.7;
@@ -138,6 +205,7 @@ main {
   margin-left: auto;
   margin-right: auto;
 }
+
 .contact-email {
   display: inline-block;
   background: #042a63;
@@ -145,13 +213,14 @@ main {
   padding: 12px 25px;
   border-radius: 8px;
   font-weight: 600;
-  text-decoration: none;
   transition: all 0.3s ease;
 }
+
 .contact-email:hover {
   background: #002b55;
   transform: scale(1.05);
 }
+
 .response-times {
   margin-top: 20px;
   display: flex;
@@ -160,23 +229,19 @@ main {
   color: #555;
   font-size: 0.9em;
 }
+
 .response-times span {
   background: #e9ecef;
   padding: 5px 12px;
   border-radius: 99px;
 }
 
-/* Estilo del acordeón */
 .accordion details {
   background: #ffffff;
   border-radius: 10px;
   margin-bottom: 15px;
   border: 1px solid #e9ecef;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
-}
-.accordion details:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 .accordion summary {
@@ -185,14 +250,18 @@ main {
   font-weight: 600;
   color: #042a63;
   cursor: pointer;
-  list-style: none; /* Ocultar marcador por defecto */
+  list-style: none;
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
 .accordion summary::after {
-  content: '\f0142'; /* Icono de chevron-down de MDI */
+  content: '\f0142';
   font-family: "Material Design Icons";
   margin-left: auto;
   font-size: 1.4em;
@@ -208,55 +277,346 @@ main {
   line-height: 1.8;
   color: #333;
 }
-.details-content p, .details-content ul {
-  margin: 0;
-}
+
 .details-content ul {
   padding-left: 20px;
   margin-top: 15px;
 }
+
 .details-content li {
   margin-bottom: 10px;
 }
 
-/* Grid para la sección de "Uso de datos" */
 .data-usage-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
 }
+
 .usage-card {
   background: #f8f9fa;
   padding: 20px;
   border-radius: 8px;
   border: 1px solid #e9ecef;
 }
+
 .usage-card h4 {
   color: #042a63;
   margin-bottom: 8px;
 }
+
 .usage-card p {
   font-size: 0.95em;
   line-height: 1.6;
 }
 
 /* ============================================= */
-/* ===== AJUSTES RESPONSIVOS                 ===== */
+/* ===== FOOTER REDISEÑADO                 ===== */
 /* ============================================= */
+.footer {
+  background-color: #28306e;
+  color: #adb5bd;
+  padding: 80px 40px 30px 40px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-about {
+  max-width: 400px;
+}
+
+.footer-logo {
+  max-height: 80px;
+  margin-bottom: 20px;
+}
+
+.footer-description {
+  font-size: 0.95em;
+  line-height: 1.7;
+}
+
+.footer-social {
+  text-align: right;
+}
+
+.footer-social p {
+  margin-bottom: 15px;
+  font-size: 1em;
+  font-weight: 500;
+  color: #f8f9fa;
+}
+
+.social-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #042a63;
+  color: #ffffff;
+  font-weight: 600;
+  border: 2px solid #ffffff;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  font-size: 1em;
+}
+
+.social-btn:hover {
+  background: #ffffff;
+  color: #042a63;
+  transform: translateY(-3px) scale(1.05);
+}
+
+.footer-divider {
+  border: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-bottom: 40px;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.footer-column h3 {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.footer-column ul li {
+  margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+  color: #adb5bd;
+  transition: color 0.3s, padding-left 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #ffffff;
+  padding-left: 5px;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-list i {
+  font-size: 1.2em;
+  color: #ffffff;
+}
+
+.contact-list span {
+  color: #adb5bd;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-bottom p {
+  font-size: 0.9em;
+}
+
+/* ========================================================== */
+/* ===== ESTILOS RESPONSIVE (NAVBAR, FOOTER Y PÁGINA) ===== */
+/* ========================================================== */
+@media (max-width: 950px) {
+  header.header-menu-open {
+    z-index: 1010;
+  }
+
+  .navbar {
+    padding: 0 30px;
+  }
+
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: #042a63;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .hamburger-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+  }
+
+  .hamburger-btn.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    padding: 120px 40px 40px 40px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 25px;
+    background-color: #ffffff;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.4s ease-in-out;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links a {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #042a63;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .cta-desktop {
+    display: none;
+  }
+
+  .nav-links__cta-mobile {
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .nav-links__cta-mobile .cta {
+    color: #fff !important;
+    width: 100%;
+    padding: 14px 30px;
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1005;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  body.no-scroll {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 800px) {
+  .footer-top {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-social {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .footer-links {
+    text-align: center;
+  }
+
+  .contact-list li {
+    justify-content: center;
+  }
+}
 
 @media (max-width: 700px) {
-  .navbar { padding: 0 20px; height: 90px; }
-  .navbar.scrolled { height: 60px; }
-  .logo { height: 56px; }
-  .logo img.logo--siglas { height: 56px; }
-  .logo img.logo--full { height: 38px; }
+  .navbar {
+    height: 90px;
+    padding: 0 20px;
+  }
 
-  main { padding-top: 90px; }
-  .policy-hero { padding: 60px 20px; }
-  .hero-content h1 { font-size: 2.2em; }
-  
-  .policy-container { padding: 40px 20px; }
-  .contact-highlight { padding: 25px; }
-  .response-times { flex-direction: column; gap: 10px; align-items: center; }
-  .data-usage-grid { grid-template-columns: 1fr; }
+  .navbar.scrolled {
+    height: 60px;
+  }
+
+  .logo {
+    height: 56px;
+  }
+
+  .logo img.logo--siglas {
+    height: 56px;
+  }
+
+  .logo img.logo--full {
+    height: 38px;
+  }
+
+  main {
+    padding-top: 90px;
+  }
+
+  .policy-hero {
+    padding: 50px 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.2em;
+  }
+
+  .policy-container,
+  .contact-highlight {
+    padding: 25px;
+  }
+
+  .response-times {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .data-usage-grid {
+    grid-template-columns: 1fr;
+  }
 }
