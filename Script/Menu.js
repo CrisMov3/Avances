@@ -1,3 +1,6 @@
+// ===== CONFIGURACIÓN =====
+const modalEnabled = true; // Cambia a false para desactivar el modal
+
 // ===== SCROLL EFFECT (navbar) =====
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -10,34 +13,41 @@ window.addEventListener('scroll', () => {
 
 // ===== MODAL =====
 document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("welcomeModal");
-  if (!modal) return; // si no existe, salimos
+  if (!modalEnabled) return; // Si está en false, no se ejecuta
 
-  // mostrar modal cada carga
-  // usamos clase 'open' para evitar conflictos con estilos inline
-  // añade una pequeña demora si prefieres (opcional)
-  setTimeout(() => modal.classList.add('open'), 50);
+  const modal = document.getElementById("welcomeModal");
+  if (!modal) return;
 
   const closeBtn = modal.querySelector('.close');
 
-  // cerrar con botón
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('open');
-    });
+  // Mostrar modal al cargar
+  setTimeout(() => {
+    modal.classList.add('open');
+    modal.style.display = "flex";
+  }, 100);
+
+  // Función para cerrar con animación
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.classList.add('closing');
+    setTimeout(() => {
+      modal.classList.remove('closing');
+      modal.style.display = "none";
+    }, 400); // mismo tiempo que la animación en CSS
   }
 
-  // cerrar haciendo clic fuera del contenido
+  // Cerrar con botón
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  // Cerrar haciendo clic fuera del contenido
   window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('open');
-    }
+    if (e.target === modal) closeModal();
   });
 
-  // cerrar con tecla Esc
+  // Cerrar con tecla ESC
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' || e.key === 'Esc') {
-      modal.classList.remove('open');
-    }
+    if (e.key === 'Escape') closeModal();
   });
 });
