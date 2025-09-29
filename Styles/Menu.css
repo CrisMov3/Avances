@@ -1,4 +1,5 @@
-/* ====== CSS base (tu código) ====== */
+/* ====== CSS Base y Navbar Escritorio ====== */
+
 * {
   margin: 0;
   padding: 0;
@@ -19,14 +20,17 @@ ul {
   list-style: none;
 }
 
-/* ===== NAVBAR (Sin cambios) ===== */
+
+/* ====== Header y Navbar ====== */
+
 header {
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 1000; /* Z-index base */
 }
+
 .navbar {
   background: white;
   height: 110px;
@@ -36,12 +40,17 @@ header {
   padding: 0 60px;
   transition: all 0.3s ease;
 }
+
 .navbar.scrolled {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   height: 70px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
+
+/* ====== Logo ====== */
+
 .logo {
   position: relative;
   width: auto;
@@ -51,6 +60,7 @@ header {
   overflow: visible;
   flex: 0 0 auto;
 }
+
 .logo img {
   display: block;
   transition: opacity 250ms ease, transform 250ms ease;
@@ -58,28 +68,35 @@ header {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  will-change: opacity, transform;
 }
+
 .logo img.logo--siglas {
   height: 72px;
   opacity: 1;
   transform: translateY(-50%) scale(1);
   z-index: 2;
 }
+
 .logo img.logo--full {
   height: 44px;
   opacity: 0;
   transform: translateY(-60%) scale(0.98);
   z-index: 1;
 }
+
 .navbar.scrolled .logo img.logo--siglas {
   opacity: 0;
   transform: translateY(-40%) scale(0.65);
 }
+
 .navbar.scrolled .logo img.logo--full {
   opacity: 1;
   transform: translateY(-50%) scale(1);
 }
+
+
+/* ====== Nav Links ====== */
+
 .nav-links {
   display: flex;
   gap: 30px;
@@ -88,11 +105,14 @@ header {
   color: #444;
   flex: 1 1 auto;
   justify-content: center;
+  align-items: center;
 }
+
 .nav-links a {
   position: relative;
   padding: 4px 0;
 }
+
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -103,9 +123,14 @@ header {
   background: #002b55;
   transition: width 0.3s ease;
 }
+
 .nav-links a:hover::after {
   width: 100%;
 }
+
+
+/* ====== CTA Button ====== */
+
 .cta {
   display: inline-flex;
   align-items: center;
@@ -115,16 +140,132 @@ header {
   color: #fff;
   border-radius: 999px;
   font-weight: 700;
-  transition: background 0.25s ease, transform 0.18s ease, box-shadow 0.18s;
+  transition: all 0.25s ease;
   box-shadow: 0 6px 18px rgba(4, 42, 99, 0.18);
   border: 1px solid rgba(255,255,255,0.05);
-  flex: 0 0 auto;
-  margin-left: 16px;
 }
+
 .cta:hover {
   background: linear-gradient(90deg, #03306b, #012a5b);
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 10px 26px rgba(4, 42, 99, 0.25);
+}
+
+
+/* ====== Ocultar elementos específicos por defecto ====== */
+
+.nav-links__cta-mobile {
+  display: none;
+}
+
+.hamburger-btn {
+  display: none;
+}
+
+.overlay {
+  display: none;
+}
+
+/* ========================================================== */
+/* ===== ESTILOS RESPONSIVE PARA LA NAVBAR (CORREGIDO) ===== */
+/* ========================================================== */
+@media (max-width: 1200px) {
+
+  /* --- SOLUCIÓN AL PROBLEMA DE CAPAS --- */
+  /* Cuando el menú está abierto, elevamos toda la cabecera por encima del overlay */
+  header.header-menu-open {
+    z-index: 1010;
+  }
+  
+  .navbar {
+    padding: 0 30px;
+  }
+  
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001; /* Asegura que el botón esté por encima del contenido del navbar */
+  }
+
+  .hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: #042a63;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .hamburger-btn.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+  .hamburger-btn.active span:nth-child(2) { opacity: 0; }
+  .hamburger-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%; 
+    width: 300px;
+    height: 100vh;
+    padding: 120px 40px 40px 40px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 25px;
+    background-color: #ffffff;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.4s ease-in-out;
+    /* z-index aquí no es necesario, ya que su padre (header) se elevará */
+  }
+
+  .nav-links.active {
+    right: 0; 
+  }
+
+  .nav-links a { font-size: 1.2rem; font-weight: 600; color: #042a63; }
+  .nav-links a::after { display: none; }
+
+  .cta-desktop { display: none; }
+  .nav-links__cta-mobile { display: block; margin-top: 20px; }
+  .nav-links__cta-mobile .cta { padding: 14px 30px; }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1005; /* Se posiciona entre el contenido y el header activo */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  body.no-scroll {
+    overflow: hidden;
+  }
+}
+
+/* Ajustes responsivos anteriores */
+@media (max-width: 700px) {
+  .navbar { height: 90px; padding: 0 20px; }
+  .navbar.scrolled { height: 60px; }
+  .logo { height: 56px; }
+  .logo img.logo--siglas { height: 56px; }
+  .logo img.logo--full { height: 38px; }
+  main { margin-top: 120px; }
 }
 
 /* ===== DEMO CONTENT (Sin cambios) ===== */
