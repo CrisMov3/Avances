@@ -5,10 +5,10 @@
   <link rel="stylesheet" href="Styles/Menu.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Strokbig</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <header>
     <nav class="navbar" id="navbar">
       <div class="logo" aria-hidden="false">
@@ -29,19 +29,77 @@
   </header>
 
   <main>
-    <!-- Contenido de prueba para permitir scroll -->
     <h1>Demo</h1>
     <p>Desplaza la página para ver el cambio de logo y el estilo del navbar.</p>
   </main>
 
-<!-- MODAL -->
-<div id="welcomeModal" class="modal" aria-hidden="true" role="dialog" aria-label="Modal bienvenida">
-  <div class="modal-content" role="document">
-    <button class="close" aria-label="Cerrar modal">&times;</button>
-    <img src="assets/Imagen_promo.png" alt="Promoción Strokbig">
+  <div id="welcomeModal" class="modal" aria-hidden="true" role="dialog" aria-label="Modal bienvenida">
+    <div class="modal-content" role="document">
+      <button class="close" aria-label="Cerrar modal">&times;</button>
+      <img src="assets/Imagen_promo.png" alt="Promoción Strokbig">
+    </div>
   </div>
-</div>
 
-<script src="Script/Menu.js"></script>
+  <footer class="footer">
+    <div class="footer-container">
+      
+      <div class="footer-top">
+        <div class="footer-about">
+          <img src="assets/StrokbigNombrecompleto.png" alt="Logo Strokbig" class="footer-logo">
+          <p class="footer-description">
+            Soluciones tecnológicas innovadoras para la gestión académica y el desarrollo empresarial.
+          </p>
+        </div>
+        <div class="footer-social">
+          <p>Descubre nuestros proyectos y novedades.</p>
+          <a href="https://crismov3.github.io/STROKBIG-/" target="_blank" class="social-btn">🌐 Síguenos</a>
+        </div>
+      </div>
+
+      <hr class="footer-divider">
+
+      <div class="footer-links">
+        <div class="footer-column">
+          <h3>Navegación</h3>
+          <ul>
+            <li><a href="ETH.html">Servicios</a></li>
+            <li><a href="#">Nosotros</a></li>
+            <li><a href="#">Clientes</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Soporte</h3>
+          <ul>
+            <li><a href="#">Centro de Ayuda</a></li>
+            <li><a href="#">Preguntas Frecuentes</a></li>
+            <li><a href="#">Reportar un Problema</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="T&C.html">Términos y Condiciones</a></li>
+            <li><a href="PTD.html">Política de Privacidad</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contáctanos</h3>
+          <ul class="contact-list">
+            <li><i class="mdi mdi-email-outline"></i> <a href="mailto:soporte@strokbig.com">soporte@strokbig.com</a></li>
+            <li><i class="mdi mdi-phone-outline"></i> <a href="tel:+573001234567">+57 300 123 4567</a></li>
+            <li><i class="mdi mdi-map-marker-outline"></i> <span>Medellín, Colombia</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Strokbig S.A.S - Todos los derechos reservados.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="Script/Menu.js"></script>
 </body>
 </html>
