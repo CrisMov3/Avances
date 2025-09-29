@@ -1,7 +1,6 @@
 /* ============================================= */
-/* ===== ESTILOS GLOBALES Y DE NAVEGACIÓN ===== */
+/* ===== ESTILOS GENERALES (NAVBAR, CTA, ETC.) ===== */
 /* ============================================= */
-
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +9,7 @@
 
 body {
   font-family: 'Poppins', Arial, sans-serif;
-  background: #f8f9fa; /* Un fondo ligeramente más gris para contraste */
+  background: #f8f9fa;
   color: #343a40;
 }
 
@@ -23,7 +22,6 @@ ul {
   list-style: none;
 }
 
-/* ===== NAVBAR (Sin cambios, es el mismo que proporcionaste) ===== */
 header {
   width: 100%;
   position: fixed;
@@ -66,31 +64,24 @@ header {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  will-change: opacity, transform;
 }
 
 .logo img.logo--siglas {
   height: 72px;
   opacity: 1;
-  transform: translateY(-50%) scale(1);
-  z-index: 2;
 }
 
 .logo img.logo--full {
   height: 44px;
   opacity: 0;
-  transform: translateY(-60%) scale(0.98);
-  z-index: 1;
 }
 
 .navbar.scrolled .logo img.logo--siglas {
   opacity: 0;
-  transform: translateY(-40%) scale(0.65);
 }
 
 .navbar.scrolled .logo img.logo--full {
   opacity: 1;
-  transform: translateY(-50%) scale(1);
 }
 
 .nav-links {
@@ -101,6 +92,7 @@ header {
   color: #444;
   flex: 1 1 auto;
   justify-content: center;
+  align-items: center;
 }
 
 .nav-links a {
@@ -132,34 +124,33 @@ header {
   color: #fff;
   border-radius: 999px;
   font-weight: 700;
-  transition: background 0.25s ease, transform 0.18s ease, box-shadow 0.18s;
+  transition: all 0.25s ease;
   box-shadow: 0 6px 18px rgba(4, 42, 99, 0.18);
   border: 1px solid rgba(255,255,255,0.05);
-  flex: 0 0 auto;
-  margin-left: 16px;
 }
 
 .cta:hover {
-  background: linear-gradient(90deg, #03306b, #012a5b);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 26px rgba(4, 42, 99, 0.25);
 }
 
+.nav-links__cta-mobile,
+.hamburger-btn,
+.overlay {
+  display: none;
+}
 
 /* ============================================= */
-/* ===== NUEVO DISEÑO DE LA SECCIÓN DE TÉRMINOS ===== */
+/* ===== ESTILOS ESPECÍFICOS DE LA PÁGINA    ===== */
 /* ============================================= */
 
-/* Contenedor principal para evitar que el contenido se oculte tras el navbar */
 main {
-  padding-top: 110px; /* Altura inicial del navbar */
+  padding-top: 110px; /* Espacio para la navbar, sin padding extra */
 }
 
-/* Banner superior (Hero) */
 .terms-hero {
   background: #28306e;
   color: #ffffff;
-  padding: 80px 40px;
+  padding: 60px 40px; /* Padding vertical reducido */
   text-align: center;
 }
 
@@ -176,18 +167,15 @@ main {
   margin: 0 auto;
 }
 
-/* Cuadrícula para las tarjetas de términos */
 .terms-grid {
   display: grid;
-  /* Crea columnas responsivas: se ajustan automáticamente */
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
-  padding: 60px 40px;
+  padding: 60px 20px; /* Padding horizontal para que no toque los bordes */
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Estilo individual de cada tarjeta */
 .term-card {
   background: #ffffff;
   border-radius: 12px;
@@ -204,16 +192,15 @@ main {
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo del icono en la tarjeta */
 .card-icon {
-  font-size: 2.5rem; /* Tamaño del icono */
-  color: #042a63; /* Color principal de la marca */
+  font-size: 2.5rem;
+  color: #042a63;
   width: 60px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #eef3fb; /* Fondo suave para el icono */
+  background-color: #eef3fb;
   border-radius: 50%;
 }
 
@@ -230,27 +217,301 @@ main {
 }
 
 /* ============================================= */
-/* ===== AJUSTES RESPONSIVOS                 ===== */
+/* ===== FOOTER REDISEÑADO                 ===== */
 /* ============================================= */
+.footer {
+  background-color: #28306e;
+  color: #adb5bd;
+  padding: 80px 40px 30px 40px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-about {
+  max-width: 400px;
+}
+
+.footer-logo {
+  max-height: 50px;
+  margin-bottom: 20px;
+}
+
+.footer-description {
+  font-size: 0.95em;
+  line-height: 1.7;
+}
+
+.footer-social {
+  text-align: right;
+}
+
+.footer-social p {
+  margin-bottom: 15px;
+  font-size: 1em;
+  font-weight: 500;
+  color: #f8f9fa;
+}
+
+.social-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #042a63;
+  color: #ffffff;
+  font-weight: 600;
+  border: 2px solid #ffffff;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  font-size: 1em;
+}
+
+.social-btn:hover {
+  background: #ffffff;
+  color: #042a63;
+  transform: translateY(-3px) scale(1.05);
+}
+
+.footer-divider {
+  border: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-bottom: 40px;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.footer-column h3 {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.footer-column ul li {
+  margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+  color: #adb5bd;
+  transition: color 0.3s, padding-left 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #ffffff;
+  padding-left: 5px;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-list i {
+  font-size: 1.2em;
+  color: #ffffff;
+}
+
+.contact-list span {
+  color: #adb5bd;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-bottom p {
+  font-size: 0.9em;
+}
+
+/* ========================================================== */
+/* ===== ESTILOS RESPONSIVE (NAVBAR, FOOTER Y PÁGINA) ===== */
+/* ========================================================== */
+@media (max-width: 950px) {
+
+  header.header-menu-open {
+    z-index: 1010;
+  }
+
+  .navbar {
+    padding: 0 30px;
+  }
+
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: #042a63;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .hamburger-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+  }
+
+  .hamburger-btn.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    padding: 120px 40px 40px 40px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 25px;
+    background-color: #ffffff;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.4s ease-in-out;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links a {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #042a63;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .cta-desktop {
+    display: none;
+  }
+
+  .nav-links__cta-mobile {
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .nav-links__cta-mobile .cta {
+    color: #fff !important;
+    width: 100%;
+    padding: 14px 30px;
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1005;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  body.no-scroll {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 800px) {
+
+  .footer-top {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-social {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .footer-links {
+    text-align: center;
+  }
+
+  .contact-list li {
+    justify-content: center;
+  }
+}
 
 @media (max-width: 700px) {
-  .navbar { padding: 0 20px; height: 90px; }
-  .navbar.scrolled { height: 60px; }
-  .logo { height: 56px; }
-  .logo img.logo--siglas { height: 56px; }
-  .logo img.logo--full { height: 38px; }
-  .nav-links { gap: 12px; font-size: 14px; }
-  .cta { padding: 10px 16px; font-size: 14px; }
+
+  .navbar {
+    height: 90px;
+    padding: 0 20px;
+  }
+
+  .navbar.scrolled {
+    height: 60px;
+  }
+
+  .logo {
+    height: 56px;
+  }
+
+  .logo img.logo--siglas {
+    height: 56px;
+  }
+
+  .logo img.logo--full {
+    height: 38px;
+  }
 
   main {
-    padding-top: 90px; /* Ajuste para navbar móvil */
+    padding-top: 90px;
   }
 
   .terms-hero {
-    padding: 60px 20px;
+    padding: 50px 20px;
   }
+
   .hero-content h1 {
-      font-size: 2.2em;
+    font-size: 2.2em;
   }
 
   .terms-grid {
