@@ -375,7 +375,7 @@ main {
 /* ========================================================== */
 /* ===== ESTILOS RESPONSIVE PARA LA NAVBAR Y FOOTER ===== */
 /* ========================================================== */
-@media (max-width: 1200px) {
+@media (max-width: 950px) {
   header.header-menu-open { 
     z-index: 1010; 
   }
@@ -534,3 +534,4 @@ main {
     margin-top: 120px; 
   }
 }
+
