@@ -1,5 +1,5 @@
 // ===== CONFIGURACIÓN =====
-const modalEnabled = true;
+const modalEnabled = false;
 
 // ===== LÓGICA DE NAVBAR Y MODAL =====
 document.addEventListener("DOMContentLoaded", () => {
@@ -90,3 +90,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
