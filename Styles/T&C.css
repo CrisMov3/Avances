@@ -240,7 +240,7 @@ main {
 }
 
 .footer-logo {
-  max-height: 50px;
+  max-height: 80px;
   margin-bottom: 20px;
 }
 
@@ -516,3 +516,4 @@ main {
     gap: 20px;
   }
 }
+
