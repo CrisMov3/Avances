@@ -901,6 +901,140 @@
     animation: fadeIn 0.5s ease-in-out;
 }
 
+.footer {
+  background-color: #28306e;
+  color: #adb5bd;
+  padding: 80px 40px 30px 40px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-about {
+  max-width: 400px;
+}
+
+.footer-logo {
+  max-height: 80px;
+  margin-bottom: 20px;
+}
+
+.footer-description {
+  font-size: 0.95em;
+  line-height: 1.7;
+}
+
+.footer-social {
+  text-align: right;
+}
+
+.footer-social p {
+  margin-bottom: 15px;
+  font-size: 1em;
+  font-weight: 500;
+  color: #f8f9fa;
+}
+
+/* 1. Convierte la columna entera en un contenedor flexible y la centra. */
+.footer-column.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente el título y la lista de iconos */
+}
+
+/* 2. Estilos para la lista de iconos. */
+.social-icons {
+  display: flex;
+  justify-content: center; /* Asegura que los iconos estén centrados */
+  gap: 30px;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: #adb5bd;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.footer-divider {
+  border: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-bottom: 40px;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.footer-column h3 {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.footer-column ul li {
+  margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+  color: #adb5bd;
+  transition: color 0.3s, padding-left 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #ffffff;
+  padding-left: 5px;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-list i {
+  font-size: 1.2em;
+  color: #ffffff;
+}
+
+.contact-list span {
+  color: #adb5bd;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-bottom p {
+  font-size: 0.9em;
+}
+
 /* Animación para mostrar los detalles */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
@@ -1048,3 +1182,5 @@
     }
     .detail-item svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
     .detail-item:hover { background: #ececec; transform: translateY(-3px); }
+
+    
