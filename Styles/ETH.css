@@ -1,10 +1,10 @@
 /* --- Variables y Estilos Globales --- */
 :root {
-  --primary-color: #F97316; /* Naranja Vibrante */
+  --primary-color: #F97316;
   --primary-hover: #EA580C;
-  --dark-blue: #0F172A;     /* Azul Oscuro para texto */
+  --dark-blue: #0F172A;
   --mid-blue: #334155;
-  --light-gray: #F8FAFC;    /* Fondo claro para secciones */
+  --light-gray: #F8FAFC;
   --white-color: #FFFFFF;
   --border-color: #E2E8F0;
   --font-family: 'Poppins', sans-serif;
@@ -20,6 +20,7 @@ body {
   font-family: var(--font-family);
   color: var(--mid-blue);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 .container {
@@ -47,7 +48,7 @@ body {
 }
 
 /* ============================================= */
-/* ===== HEADER Y NAVBAR (ESTILOS FINALES) ===== */
+/* ===== HEADER Y NAVBAR ===== */
 /* ============================================= */
 header {
   width: 100%;
@@ -178,7 +179,7 @@ header {
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .btn-primary {
@@ -330,7 +331,7 @@ header {
   font-weight: 700;
   border-radius: 999px;
   display: inline-block;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
   box-shadow: 0 8px 20px rgba(249, 115, 22, 0.25);
 }
 
@@ -415,12 +416,6 @@ header {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.pricing-grid {
-  padding-top: 35px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  align-items: stretch;
-}
-
 .card {
   background-color: var(--white-color);
   border: 1px solid var(--border-color);
@@ -452,7 +447,19 @@ header {
   background-color: var(--light-gray);
 }
 
-/* --- Tarjetas de Precios --- */
+/* --- Sección Precios (Diseño Original) --- */
+.pricing-grid {
+  padding-top: 35px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: center;
+}
+
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .pricing-card .price {
   font-size: 1.2rem;
   color: var(--dark-blue);
@@ -478,10 +485,10 @@ header {
 }
 
 .pricing-card ul {
+  list-style: none;
   text-align: left;
   margin-bottom: 30px;
   flex-grow: 1;
-  list-style: none;
   padding-left: 0;
 }
 
@@ -529,10 +536,166 @@ header {
 }
 
 /* ============================================= */
-/* ===== FOOTER (ESTILOS FINALES)          ===== */
+/* ===== SECCIÓN: SERVICIOS ADICIONALES    ===== */
+/* ============================================= */
+#additional-services {
+  background-color: #f7f9fc;
+  padding-bottom: 100px;
+}
+
+#additional-services .section-title {
+  margin-bottom: 60px;
+}
+
+.additional-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.service-card {
+  background-color: var(--white-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  border-color: #a4ccf1;
+}
+
+.service-card.active {
+  border-color: #042a63;
+  background-color: #eef5fd;
+  box-shadow: 0 6px 20px rgba(4, 42, 99, 0.1);
+  transform: translateY(-2px);
+}
+
+.service-card i {
+  font-size: 3.5rem;
+  color: #042a63;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.service-card h3 {
+  font-size: 1.25rem;
+  color: var(--dark-blue);
+  margin: 0;
+}
+
+#service-details-wrapper {
+  background-color: #eef5fd;
+  border: 1px solid #c7d2fe;
+  border-radius: 16px;
+  padding: 40px;
+  margin-top: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+  transition: all 0.4s ease;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#default-service-content {
+  text-align: center;
+  color: #64748b;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#default-service-content i {
+  font-size: 5rem;
+  margin-bottom: 20px;
+}
+
+#default-service-content h3 {
+  font-size: 1.8rem;
+  color: #334155;
+}
+
+#dynamic-service-content {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+}
+
+#service-details-wrapper > div:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0);
+  position: static;
+  pointer-events: auto;
+}
+
+#dynamic-service-content h3 {
+  font-size: 1.8rem;
+  color: var(--dark-blue);
+  margin-bottom: 10px;
+}
+
+#dynamic-service-content p {
+  font-size: 1.1rem;
+  color: var(--mid-blue);
+  margin-bottom: 30px;
+}
+
+.sub-service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.sub-service-card {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.sub-service-card:hover {
+  background-color: #eef5fd;
+  border-color: #a4ccf1;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.sub-service-card i {
+  font-size: 2.5rem;
+  color: #042a63;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.sub-service-card h4 {
+  font-size: 1rem;
+  color: var(--dark-blue);
+  margin: 0;
+}
+
+/* ============================================= */
+/* ===== FOOTER Y RESPONSIVE               ===== */
 /* ============================================= */
 .footer {
-  background-color: #28306e;
+  background-color: #0d1a2e;
   color: #adb5bd;
   padding: 80px 40px 30px 40px;
 }
@@ -555,7 +718,7 @@ header {
 }
 
 .footer-logo {
-  max-height: 80px;
+  max-height: 50px;
   margin-bottom: 20px;
 }
 
@@ -648,7 +811,7 @@ header {
 }
 
 /* ============================================= */
-/* ===== ESTILOS RESPONSIVE (FINALES)      ===== */
+/* ================ MEDIA QUERIES ============== */
 /* ============================================= */
 @media (max-width: 1200px) {
   .hamburger-btn {
@@ -742,7 +905,6 @@ header {
     visibility: visible;
   }
 
-  /* --- REGLAS RESPONSIVE PARA "POR QUÉ USAR ZEITPLAN" --- */
   .why-zeitplan-container {
     flex-direction: column;
     gap: 40px;
@@ -757,9 +919,8 @@ header {
     text-align: center;
   }
 
-  /* --- CORRECCIÓN RESPONSIVE PARA EL ANCHO DEL CONTENEDOR --- */
   .why-text-content {
-    min-width: auto; /* Permite que el contenedor se encoja en pantallas pequeñas */
+    min-width: auto;
   }
 }
 
@@ -795,5 +956,13 @@ header {
 
   .navbar.scrolled {
     height: 60px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
   }
 }
