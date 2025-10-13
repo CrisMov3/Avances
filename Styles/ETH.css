@@ -532,7 +532,7 @@ header {
 /* ===== FOOTER (ESTILOS FINALES)          ===== */
 /* ============================================= */
 .footer {
-  background-color: #0d1a2e;
+  background-color: #28306e;
   color: #adb5bd;
   padding: 80px 40px 30px 40px;
 }
@@ -555,7 +555,7 @@ header {
 }
 
 .footer-logo {
-  max-height: 50px;
+  max-height: 80px;
   margin-bottom: 20px;
 }
 
@@ -791,3 +791,4 @@ header {
     height: 60px;
   }
 }
+
