@@ -1,60 +1,92 @@
-(function(){
-            const buttons = document.querySelectorAll('.why-item');
-            const img = document.getElementById('mockup-image');
-            const caption = document.getElementById('mockup-caption');
+(function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        const featureCardsWrapper = document.querySelector('.feature-cards-wrapper');
+        const desktopImagePanel = document.querySelector('.why-image-panel');
+        
+        if (!featureCardsWrapper || !desktopImagePanel) {
+            return;
+        }
+        
+        const featureCards = featureCardsWrapper.querySelectorAll('.feature-card');
+        const desktopDisplayImage = document.getElementById('zeitplan-display-image');
+        const desktopImageCaption = document.getElementById('zeitplan-image-caption');
 
-            function activate(btn){
-                buttons.forEach(b => {
-                    b.classList.toggle('active', b === btn);
-                    b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
-                });
+        const mobileMediaQuery = window.matchMedia('(max-width: 1200px)');
+
+        function updateDesktopDisplay(cardElement) {
+            const newImageSrc = cardElement.dataset.image;
+            const newImageAlt = cardElement.dataset.alt;
+            const cardTitle = cardElement.querySelector('.card-text h3').textContent;
+            const cardDescription = cardElement.querySelector('.card-text p').textContent;
+            
+            desktopDisplayImage.style.opacity = 0;
+            setTimeout(() => {
+                desktopDisplayImage.src = newImageSrc;
+                desktopDisplayImage.alt = newImageAlt;
+                desktopImageCaption.textContent = `${cardTitle}: ${cardDescription}`;
+                desktopDisplayImage.style.opacity = 1;
+            }, 250);
+        }
+        
+        function handleMobileDisplay(cardElement) {
+            const currentlyOpenImage = document.querySelector('.mobile-image-display');
+            const wasActive = cardElement.classList.contains('active');
+
+            if (currentlyOpenImage) {
+                currentlyOpenImage.remove();
             }
 
-            buttons.forEach((btn, i) => {
-                // set initial aria-pressed
-                btn.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
-                if(i === 0) btn.classList.add('active');
+            featureCards.forEach(c => c.classList.remove('active'));
 
-                btn.addEventListener('click', () => {
-                    const src = btn.dataset.img;
-                    const text = btn.dataset.caption || '';
-                    if (src) img.src = src;
-                    if (text) caption.textContent = text;
-                    activate(btn);
-                });
-            });
-        })();
+            if (!wasActive) {
+                cardElement.classList.add('active');
+                
+                const newImageSrc = cardElement.dataset.image;
+                const newImageAlt = cardElement.dataset.alt;
+                
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'mobile-image-display';
+                imageContainer.innerHTML = `<img src="${newImageSrc}" alt="${newImageAlt}">`;
 
-function showDetail(service) {
-        document.querySelectorAll('.service-detail').forEach(d => d.classList.remove('active'));
-        document.getElementById(service).classList.add('active');
-    }
+                cardElement.after(imageContainer);
+            }
+        }
+        
+        featureCardsWrapper.addEventListener('click', function(event) {
+            const clickedCard = event.target.closest('.feature-card');
+            if (!clickedCard) return;
 
-// ===== SCROLL EFFECT =====
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-  (function(){
-    const items = document.querySelectorAll('.why-item');
-    if ('IntersectionObserver' in window){
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.style.transform = 'translateY(0)';
-            e.target.style.opacity = '1';
-            obs.unobserve(e.target);
-          }
+            if (mobileMediaQuery.matches) {
+                handleMobileDisplay(clickedCard);
+            } else {
+                featureCards.forEach(c => c.classList.remove('active'));
+                clickedCard.classList.add('active');
+                updateDesktopDisplay(clickedCard);
+            }
         });
-      }, { threshold: 0.15 });
-      items.forEach(it => {
-        it.style.transform = 'translateY(18px)';
-        it.style.opacity = '0';
-        obs.observe(it);
-      });
-    }
-  })();
+
+        function setInitialState() {
+            const openImage = document.querySelector('.mobile-image-display');
+            if (openImage) openImage.remove();
+            
+            if (mobileMediaQuery.matches) {
+                featureCards.forEach(c => c.classList.remove('active'));
+            } else {
+                if (featureCards.length > 0) {
+                    let isActiveFound = false;
+                    featureCards.forEach(card => {
+                        if(card.classList.contains('active')) isActiveFound = true;
+                    });
+                    if (!isActiveFound) {
+                        featureCards[0].classList.add('active');
+                    }
+                    updateDesktopDisplay(document.querySelector('.feature-card.active'));
+                }
+            }
+        }
+
+        setInitialState();
+        mobileMediaQuery.addEventListener('change', setInitialState);
+    });
+})();
