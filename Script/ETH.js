@@ -76,6 +76,8 @@
             const serviceCards = servicesContainer.querySelectorAll('.service-card');
             const defaultContent = document.getElementById('default-service-content');
             const dynamicContent = document.getElementById('dynamic-service-content');
+            const mobileMediaQuery = window.matchMedia('(max-width: 1200px)'); // Reutilizamos la media query
+            const detailsWrapper = document.getElementById('service-details-wrapper');
 
             const servicesData = {
                 mantenimiento: {
@@ -95,7 +97,7 @@
                         { icon: "mdi-ethernet-cable", text: "Cableado estructurado" },
                         { icon: "mdi-router-wireless-settings", text: "Configuración de routers" },
                         { icon: "mdi-wifi-strength-3", text: "Redes Wi-Fi seguras" },
-                        { icon: "mdi-lan-check", text: "Monitoreo de red" } // <-- ICONO AÑADIDO
+                        { icon: "mdi-lan-check", text: "Monitoreo de red" }
                     ]
                 },
                 instalacion: {
@@ -125,6 +127,7 @@
                     const targetKey = this.dataset.target;
                     const wasActive = this.classList.contains('active');
                     serviceCards.forEach(c => c.classList.remove('active'));
+                    
                     if (wasActive) {
                         defaultContent.classList.remove('hidden');
                         dynamicContent.classList.add('hidden');
@@ -144,6 +147,16 @@
                         `;
                         defaultContent.classList.add('hidden');
                         dynamicContent.classList.remove('hidden');
+
+                        // *** NUEVA FUNCIONALIDAD: SCROLL EN MÓVIL ***
+                        if (mobileMediaQuery.matches) {
+                            setTimeout(() => {
+                                detailsWrapper.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'center'
+                                });
+                            }, 100); // Pequeño delay para dar tiempo a que se renderice
+                        }
                     }
                 });
             });
