@@ -1,5 +1,5 @@
 // ===== CONFIGURACIÓN =====
-const modalEnabled = true;
+const modalEnabled = true; // CAMBIADO A 'true' PARA QUE EL MODAL SE MUESTRE
 
 // ===== LÓGICA DE NAVBAR Y MODAL =====
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,74 +21,74 @@ document.addEventListener("DOMContentLoaded", () => {
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const navMenu = document.getElementById('nav-menu');
   const overlay = document.getElementById('overlay');
-  const navLinks = navMenu.querySelectorAll('a');
-
-  function toggleMenu() {
-    // Revisa si el menú ya está activo para decidir si abrir o cerrar
-    const isActive = hamburgerBtn.classList.contains('active');
-    if (isActive) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  }
-
-  function openMenu() {
-    if (header) header.classList.add('header-menu-open');
-    hamburgerBtn.classList.add('active');
-    navMenu.classList.add('active');
-    overlay.classList.add('active');
-    document.body.classList.add('no-scroll');
-  }
-
-  function closeMenu() {
-    if (header) header.classList.remove('header-menu-open');
-    hamburgerBtn.classList.remove('active');
-    navMenu.classList.remove('active');
-    overlay.classList.remove('active');
-    document.body.classList.remove('no-scroll');
-  }
-
+  
   if (header && hamburgerBtn && navMenu && overlay) {
+    const navLinks = navMenu.querySelectorAll('a');
+    function openMenu() {
+      header.classList.add('header-menu-open');
+      hamburgerBtn.classList.add('active');
+      navMenu.classList.add('active');
+      overlay.classList.add('active');
+      document.body.classList.add('no-scroll');
+    }
+    function closeMenu() {
+      header.classList.remove('header-menu-open');
+      hamburgerBtn.classList.remove('active');
+      navMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+    }
+    function toggleMenu() {
+      const isActive = hamburgerBtn.classList.contains('active');
+      if (isActive) { closeMenu(); } else { openMenu(); }
+    }
     hamburgerBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', closeMenu);
-    
-    // Cierra el menú si se hace clic en un enlace dentro de él
-    navLinks.forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
+    navLinks.forEach(link => { link.addEventListener('click', closeMenu); });
   }
 
   // --- Lógica del Modal de Bienvenida ---
   if (modalEnabled) {
     const modal = document.getElementById("welcomeModal");
-    if (!modal) return; // Si el modal no existe, no continúa
-    const closeBtn = modal.querySelector('.close');
+    if (modal) {
+        const closeBtn = modal.querySelector('.close');
+        
+        // Muestra el modal al cargar la página
+        setTimeout(() => {
+          modal.classList.add('open');
+        }, 500); // Pequeño retraso para que la carga de la página se sienta suave
 
-    setTimeout(() => {
-      modal.style.display = "flex";
-      modal.classList.add('open');
-    }, 100);
+        // Función para cerrar el modal CON ANIMACIÓN
+        function closeModal() {
+          modal.classList.add('closing'); // <-- AÑADE LA CLASE PARA LA ANIMACIÓN DE CIERRE
+          
+          setTimeout(() => {
+            modal.classList.remove('open');
+            modal.classList.remove('closing'); // Limpia las clases después de la animación
+          }, 400); // La duración debe coincidir con la animación CSS
+        }
 
-    function closeModal() {
-      modal.classList.remove('open');
-      modal.classList.add('closing');
-      setTimeout(() => {
-        modal.classList.remove('closing');
-        modal.style.display = "none";
-      }, 400);
+        if (closeBtn) {
+          closeBtn.addEventListener('click', closeModal);
+        }
+        window.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeModal();
+        });
     }
-
-    if (closeBtn) {
-      closeBtn.addEventListener('click', closeModal);
-    }
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
+  }
+  
+  // --- Lógica para Pausar Carrusel de Logos ---
+  const logoSlider = document.querySelector('.logo-slider');
+  if (logoSlider) {
+    const logoTrack = logoSlider.querySelector('.logo-track');
+    logoSlider.addEventListener('mouseenter', () => {
+      logoTrack.style.animationPlayState = 'paused';
     });
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
+    logoSlider.addEventListener('mouseleave', () => {
+      logoTrack.style.animationPlayState = 'running';
     });
   }
 });
-
-
