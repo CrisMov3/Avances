@@ -1,383 +1,291 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Strokbig - ETDH</title>
-  <link rel="stylesheet" href="Styles/ETH.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeitplan - Planeación Académica Inteligente</title>
+    <link rel="stylesheet" href="Styles/ETH.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
 </head>
 <body>
-
-    <!-- ETDH SECTION -->
-  <section class="etdh-section">
-    <div class="etdh-header">
-      <h2 class="etdh-title">Planeación Académica – Horarios Escolares</h2>
-      <p class="etdh-subtitle">
-        Zeitplan es una plataforma en la nube diseñada para que tu institución 
-        <strong>organice y gestione horarios académicos</strong> de manera ágil y eficiente.  
-        Centraliza la información, evita cruces de clases y ahorra tiempo en la planeación.
-      </p>
-      <br>
-      <button class="btn-primary">Prueba Gratuita</button>
-    </div>
-
-
-    <div class="features">
-      <article class="feature-card">
-        <div class="feature-icon" aria-hidden="true" style="color: #042a63;">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" role="img">
-            <circle cx="12" cy="12" r="8"></circle>
-            <path d="M12 8v4l3 2"></path>
-          </svg>
+    <header id="header">
+      <nav class="navbar" id="navbar">
+        <div class="logo" aria-hidden="false">
+          <a href="index.html">
+            <img src="assets/STBSiglas.png" alt="STB siglas" class="logo--siglas">
+            <img src="assets/StrokbigNombrecompleto.png" alt="Strokbig nombre completo" class="logo--full">
+          </a>
         </div>
-        <div class="feature-content">
-          <h4>Automatiza tus horarios</h4>
-          <p>Genera horarios en segundos para grupos, docentes y salones sin conflictos ni duplicidades.</p>
-        </div>
-      </article>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="index.html">INICIO</a></li>
+          <li><a href="ETH.html">SERVICIOS</a></li>
+          <li><a href="#">NOSOTROS</a></li>
+          <li><a href="#">CLIENTES</a></li>
+          <li><a href="#">CONTACTO</a></li>
+          <li class="nav-links__cta-mobile"><a href="#" class="cta">Iniciar Sesión</a></li>
+        </ul>
+        <a href="#" class="cta cta-desktop">Iniciar Sesión</a>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </header>
 
-      <article class="feature-card">
-        <div class="feature-icon" aria-hidden="true" style="color: #042a63;">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" role="img">
-            <path d="M16 11c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z"></path>
-            <path d="M6 11c1.657 0 3-1.343 3-3S7.657 5 6 5 3 6.343 3 8s1.343 3 3 3z"></path>
-            <path d="M3 19a4 4 0 014-4h10a4 4 0 014 4"></path>
-          </svg>
-        </div>
-        <div class="feature-content">
-          <h4>Gestión administrativa</h4>
-          <p>Controla usuarios, roles y permisos; centraliza procesos para un flujo administrativo más ágil.</p>
-        </div>
-      </article>
+    <div class="overlay" id="overlay"></div>
 
-      <article class="feature-card">
-        <div class="feature-icon" aria-hidden="true" style="color: #042a63;">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" role="img">
-            <rect x="3" y="12" width="4" height="8"></rect>
-            <rect x="10" y="8" width="4" height="12"></rect>
-            <rect x="17" y="4" width="4" height="16"></rect>
-          </svg>
-        </div>
-        <div class="feature-content">
-          <h4>Informes estratégicos</h4>
-          <p>Reportes claros sobre carga académica y uso de espacios para apoyar la toma de decisiones.</p>
-        </div>
-      </article>
-
-      <article class="feature-card">
-        <div class="feature-icon" aria-hidden="true" style="color: #042a63;">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" role="img">
-            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polyline>
-          </svg>
-        </div>
-        <div class="feature-content">
-          <h4>Optimización de recursos</h4>
-          <p>Asigna aulas, docentes y grupos eficientemente para reducir tiempos ociosos y mejorar aprovechamiento.</p>
-        </div>
-      </article>
-    </div> 
-
-    <br>
-    <h1>Planes Zeitplan planificación académica</h1>
-    <div class="pricing-cards" aria-label="Planes y precios">
-        <article class="plan plan--basic" aria-labelledby="basic-title">
-            <div class="plan-header">
-                <div>
-                    <div id="basic-title" class="plan-title">Básico</div>
-                    <div style="font-size:0.9rem;color:var(--color-muted);margin-top:6px">Ideal para instituciones pequeñas</div>
-                </div>
-                <div class="plan-price">COP 850.000<small>/ semestre</small></div>
-            </div>
-
-            <ul class="plan-features">
-                <li>1 acceso administrativo</li>
-                <li>Generación automática de horarios</li>
-                <li>Gestión de grupos y salones</li>
-                <li>Reportes básicos</li>
-            </ul>
-
-            <div class="plan-footer">
-                <div style="color:var(--color-muted);font-weight:600">Soporte por correo</div>
-                <button class="btn-choose" onclick="window.location='#'">Solicitar demo</button>
-            </div>
-        </article>
-
-        <article class="plan plan--professional" aria-labelledby="pro-title">
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-                <div>
-                    <div id="pro-title" class="plan-title">Profesional</div>
-                    <div style="font-size:0.9rem;color:rgba(255,255,255,0.9);margin-top:6px">Recomendado para instituciones medianas</div>
-                </div>
-                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
-                    <span class="badge" aria-hidden="true">RECOMENDADO</span>
-                    <div class="plan-price" style="color:#fff">COP 1.460.000<small style="color:rgba(255,255,255,0.85)">/ semestre</small></div>
+    <main>
+        <section id="hero">
+            <div class="container hero-content">
+                <h1>Planeación Académica Inteligente: Horarios Escolares en Minutos, no en Semanas.</h1>
+                <p>Zeitplan es la plataforma en la nube diseñada para que tu institución <strong>organice y gestione horarios académicos</strong> de manera ágil y eficiente. Ahorra tiempo, evita conflictos y potencia el éxito de tu planificación con una herramienta que te acompaña en cada paso.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">Solicitar una Demo</a>
+                    <a href="#pricing" class="btn btn-secondary">Ver Planes</a>
                 </div>
             </div>
+        </section>
 
-            <ul class="plan-features">
-                <li>3 accesos administrativos</li>
-                <li>Optimización automática de recursos</li>
-                <li>Reportes estratégicos avanzados</li>
-                <li>Integración con calendarios</li>
-            </ul>
-
-            <div class="plan-footer">
-                <div style="color:rgba(255,255,255,0.95);font-weight:600">Soporte prioritario</div>
-                <button class="btn-choose" onclick="window.location='#'">Solicitar demo</button>
-            </div>
-        </article>
-
-        <article class="plan plan--advanced" aria-labelledby="adv-title">
-            <div class="plan-header">
-                <div>
-                    <div id="adv-title" class="plan-title">Avanzado</div>
-                    <div style="font-size:0.9rem;color:var(--color-muted);margin-top:6px">Para grandes instituciones y proyectos</div>
+        <section id="why-zeitplan" class="section-padding">
+            <div class="container why-zeitplan-container">
+                <div class="why-text-content">
+                    <h2 class="section-title-left">¿Por qué usar Zeitplan?</h2>
+                    <p class="section-subtitle-left">Plataforma especializada en gestión y creación de horarios escolares. Pensada para instituciones que requieren rapidez, control y flexibilidad.</p>
+                    
+                    <div class="feature-cards-wrapper">
+                        <div class="feature-card" data-image="assets/servicios/horario.jpg" data-alt="Visualización de horarios generados automáticamente">
+                            <i class="mdi mdi-robot-outline card-icon-left"></i>
+                            <div class="card-text">
+                                <h3>Creación automática de horarios</h3>
+                                <p>Genera horarios para grupos, docentes y aulas en segundos evitando conflictos.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card" data-image="assets/servicios/visualizacion_clara.jpeg" data-alt="Interfaz de visualización de horarios">
+                            <i class="mdi mdi-eye-outline card-icon-left"></i>
+                            <div class="card-text">
+                                <h3>Visualización clara</h3>
+                                <p>Vistas por grupo, docente o aula; exporta en PDF/JPG alta resolución.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card" data-image="assets/servicios/adm_datos.jpg" data-alt="Panel de administración de datos">
+                            <i class="mdi mdi-database-outline card-icon-left"></i>
+                            <div class="card-text">
+                                <h3>Administración de datos</h3>
+                                <p>Gestiona permisos, perfiles y datos personales de forma centralizada.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card" data-image="assets/servicios/verificacion_dos_p.jpeg" data-alt="Configuración de seguridad en dos pasos">
+                            <i class="mdi mdi-shield-lock-outline card-icon-left"></i>
+                            <div class="card-text">
+                                <h3>Seguridad en dos pasos</h3>
+                                <p>Autenticación multifactor para proteger cuentas y datos sensibles.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card" data-image="assets/servicios/personalizacion.jpeg" data-alt="Opciones de personalización de plataforma">
+                            <i class="mdi mdi-palette-outline card-icon-left"></i>
+                            <div class="card-text">
+                                <h3>Personalización</h3>
+                                <p>Cambia logo, paleta de colores y marca para que la plataforma sea tuya.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card" data-image="assets/servicios/acceso_movil.jpg" data-alt="Aplicación móvil de Zeitplan">
+                            <i class="mdi mdi-cellphone-link card-icon-left"></i>
+                            <div class="card-text">
+                                <h3>Acceso móvil</h3>
+                                <p>App móvil para consultar horarios, recibir notificaciones y gestionar sobre la marcha.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-large cta-free-trial">Prueba gratuita</a>
                 </div>
-                <div class="plan-price">COP 2.580.000<small>/ semestre</small></div>
-            </div>
 
-            <ul class="plan-features">
-                <li>5 accesos administrativos</li>
-                <li>Asignación multi-campus</li>
-                <li>APIs e integraciones a medida</li>
-                <li>Soporte personalizado y onboarding</li>
-            </ul>
-
-            <div class="plan-footer">
-                <div style="color:var(--color-muted);font-weight:600">Soporte dedicado</div>
-                <button class="btn-choose" onclick="window.location='#'">Solicitar demo</button>
+                <div class="why-image-panel">
+                    <img src="assets/servicios/horario.jpg" alt="Visualización de horarios generados automáticamente" id="zeitplan-display-image">
+                    <p class="image-caption" id="zeitplan-image-caption">Creación automática de horarios: Genera horarios para grupos, docentes y aulas en segundos evitando conflictos.</p>
+                </div>
             </div>
-        </article>
-    </div>
-<!-- START: Sección "Por qué usar Strokbig" -->
-<section class="why-section" aria-labelledby="why-title">
-    <div class="why-inner">
-        <!-- Columna izquierda: listado -->
-        <div class="why-left">
-            <h3 id="why-title">¿Por qué usar <strong>Zeitplan</strong>?</h3>
-            <p class="lead">
-                Plataforma especializada en <strong>gestión y creación de horarios escolares</strong>.
-                Pensada para instituciones que requieren rapidez, control y flexibilidad.
+        </section>
+
+
+        <section id="features" class="section-padding">
+            <div class="container">
+                <h2 class="section-title">La plataforma definitiva para la gestión de horarios</h2>
+                <p class="section-subtitle">Automatiza tareas complejas y obtén una visibilidad completa de la operación de tu institución.</p>
+                <div class="features-grid">
+                    <div class="card">
+                        <div class="card-icon">⚡️</div>
+                        <h3>Automatiza tus horarios</h3>
+                        <p>Genera horarios sin conflictos para grupos, docentes y salones en segundos. Ahorra cientos de horas manuales.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">👥</div>
+                        <h3>Gestión administrativa</h3>
+                        <p>Controla usuarios, roles y permisos. Centraliza procesos para un flujo administrativo más ágil y seguro.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📊</div>
+                        <h3>Informes estratégicos</h3>
+                        <p>Obtén reportes claros sobre carga académica y uso de espacios para apoyar la toma de decisiones.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">💡</div>
+                        <h3>Optimización de recursos</h3>
+                        <p>Asigna aulas y docentes de forma inteligente para reducir tiempos ociosos y mejorar el aprovechamiento.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solution" class="section-padding">
+            <div class="container">
+                <h2 class="section-title">Más que un Software, Somos tu Aliado Estratégico</h2>
+                <p class="section-subtitle">Creemos que una herramienta poderosa es solo el comienzo. Nuestro verdadero objetivo es tu éxito. Por eso, complementamos nuestra tecnología con un equipo de expertos dedicados a asegurar que tu institución aproveche Zeitplan al máximo desde el primer día.</p>
+                <div class="solution-grid">
+                    <div class="card">
+                        <div class="card-icon">🚀</div>
+                        <h3>Puesta en Marcha y Migración</h3>
+                        <p>Nos encargamos de la configuración inicial y la migración de tus datos. Empiezas a operar en tiempo récord y sin complicaciones técnicas.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">👨‍🏫</div>
+                        <h3>Capacitación y Adopción</h3>
+                        <p>Formamos a tu equipo administrativo y docente para que dominen la plataforma, garantizando una transición suave y una adopción exitosa.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🎧</div>
+                        <h3>Soporte Técnico Especializado</h3>
+                        <p>Accede a un equipo que conoce Zeitplan a fondo para resolver tus dudas funcionales y técnicas de manera prioritaria. Tu operación nunca se detiene.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="section-padding">
+            <div class="container">
+                <h2 class="section-title">Un Plan para Cada Institución</h2>
+                <div class="pricing-grid">
+                    <div class="card pricing-card">
+                        <h3>Básico</h3>
+                        <p class="price">COP <strong>850.000</strong> / semestre</p>
+                        <p class="ideal-for">Ideal para instituciones pequeñas.</p>
+                        <hr>
+                        <ul>
+                            <li>✓ 1 acceso administrativo</li>
+                            <li>✓ Generación automática de horarios</li>
+                            <li>✓ Gestión de grupos y salones</li>
+                            <li>✓ Reportes básicos</li>
+                            <li>✓ Soporte por correo electrónico</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Solicitar Demo</a>
+                    </div>
+                    <div class="card pricing-card recommended">
+                        <div class="recommended-badge">Recomendado</div>
+                        <h3>Profesional</h3>
+                        <p class="price">COP <strong>1.460.000</strong> / semestre</p>
+                        <p class="ideal-for">Para instituciones que buscan optimizar.</p>
+                        <hr>
+                        <ul>
+                            <li>✓ 3 accesos administrativos</li>
+                            <li>✓ Todo lo del plan Básico, más:</li>
+                            <li>✓ Optimización automática de recursos</li>
+                            <li>✓ Reportes estratégicos avanzados</li>
+                            <li>✓ <strong>Onboarding Asistido y Configuración</strong></li>
+                            <li>✓ <strong>Soporte Prioritario (Chat y Correo)</strong></li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Solicitar Demo</a>
+                    </div>
+                    <div class="card pricing-card">
+                        <h3>Avanzado</h3>
+                        <p class="price">COP <strong>2.580.000</strong> / semestre</p>
+                        <p class="ideal-for">Grandes instituciones y multi-campus.</p>
+                        <hr>
+                        <ul>
+                            <li>✓ 5+ accesos administrativos</li>
+                            <li>✓ Todo lo del plan Profesional, más:</li>
+                            <li>✓ Asignación multi-campus</li>
+                            <li>✓ APIs e integraciones a medida</li>
+                            <li>✓ <strong>Servicio de Puesta en Marcha Premium</strong></li>
+                            <li>✓ <strong>Capacitación para el equipo</strong></li>
+                            <li>✓ <strong>Soporte Dedicado Personalizado</strong></li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Solicitar Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="cta" class="section-padding">
+            <div class="container cta-content">
+                <h2>¿Listo para transformar la planificación académica de tu institución?</h2>
+                <p>Agenda una demostración personalizada y descubre cómo la combinación de nuestra potente plataforma y nuestro equipo de expertos puede ahorrarte tiempo y optimizar tus recursos.</p>
+                <a href="#" class="btn btn-primary btn-large">Agendar mi Demo Ahora</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-top">
+          <div class="footer-about">
+            <img src="assets/StrokbigNombrecompleto.png" alt="Logo Strokbig" class="footer-logo">
+            <p class="footer-description">
+              Soluciones tecnológicas innovadoras para la gestión académica y el desarrollo empresarial.
             </p>
-
-            <ul class="why-list" role="list">
-                <li>
-                    <button type="button" class="why-item" data-img="assets/Ref1.png" data-caption="Vista principal: calendario y horarios">
-                        <span class="icon" aria-hidden="true">📅</span>
-                        <div>
-                            <h4>Creación automática de horarios</h4>
-                            <p>Genera horarios para grupos, docentes y aulas en segundos evitando conflictos.</p>
-                        </div>
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button" class="why-item" data-img="assets/Ref2.png" data-caption="Panel de visualización por grupo">
-                        <span class="icon" aria-hidden="true">👀</span>
-                        <div>
-                            <h4>Visualización clara</h4>
-                            <p>Vistas por grupo, docente o aula; exporta en PDF/JPG alta resolución.</p>
-                        </div>
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button" class="why-item" data-img="assets/Ref3.png" data-caption="Gestión de usuarios y permisos">
-                        <span class="icon" aria-hidden="true">🧑‍💻</span>
-                        <div>
-                            <h4>Administración de datos</h4>
-                            <p>Gestiona permisos, perfiles y datos personales de forma centralizada.</p>
-                        </div>
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button" class="why-item" data-img="assets/Ref4.png" data-caption="Seguridad y autenticación">
-                        <span class="icon" aria-hidden="true">🔐</span>
-                        <div>
-                            <h4>Seguridad en dos pasos</h4>
-                            <p>Autenticación multifactor para proteger cuentas y datos sensibles.</p>
-                        </div>
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button" class="why-item" data-img="assets/Ref5.png" data-caption="Opciones de personalización de marca">
-                        <span class="icon" aria-hidden="true">🎨</span>
-                        <div>
-                            <h4>Personalización</h4>
-                            <p>Cambia logo, paleta de colores y marca para que la plataforma sea tuya.</p>
-                        </div>
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button" class="why-item" data-img="assets/Ref6.png" data-caption="App móvil: consulta y notificaciones">
-                        <span class="icon" aria-hidden="true">📱</span>
-                        <div>
-                            <h4>Acceso móvil</h4>
-                            <p>App móvil para consultar horarios, recibir notificaciones y gestionar sobre la marcha.</p>
-                        </div>
-                    </button>
-                </li>
+          </div>
+          <div class="footer-column footer-social">
+          <h3>Síguenos en Redes</h3>
+            <ul class="social-icons">
+              <li><a href="https://www.facebook.com/profile.php?id=61581199993425" aria-label="Visita nuestro Facebook" target="_blank"><i class="mdi mdi-facebook"></i></a></li>
+              <li><a href="https://www.instagram.com/strokbig_sistemas/?utm_source=ig_web_button_share_sheet" aria-label="Visita nuestro Instagram" target="_blank"><i class="mdi mdi-instagram"></i></a></li>
+              <li><a href="https://g.page/r/CSzTqpvqDcYNEBI/review" aria-label="Encuéntranos en Google Maps" target="_blank"><i class="mdi mdi-google-maps"></i></a></li>
             </ul>
-
-            <div class="why-cta">
-                <a class="btn-primary" href="#signup">Prueba gratuita</a>
-            </div>
+          </div>
         </div>
-
-        <!-- Columna derecha: imagen / mockup -->
-        <div class="why-right" aria-hidden="false">
-            <div class="mockup">
-                <!-- Imagen por defecto -->
-                <img id="mockup-image" src="assets/Ref1.png" alt="Vista de la plataforma Strokbig — visualización de horarios" />
-            </div>
-            <div id="mockup-caption" class="mockup-caption">Vista principal: calendario y horarios</div>
+        
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Navegación</h3>
+            <ul>
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="ETH.html">Servicios</a></li>
+              <li><a href="#">Nosotros</a></li>
+              <li><a href="#">Clientes</a></li>
+              <li><a href="#">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Soporte</h3>
+            <ul>
+              <li><a href="#">Centro de Ayuda</a></li>
+              <li><a href="#">Preguntas Frecuentes</a></li>
+              <li><a href="#">Reportar un Problema</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="T&C.html">Términos y Condiciones</a></li>
+              <li><a href="PTD.html">Política de Privacidad</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contáctanos</h3>
+            <ul class="contact-list">
+              <li><i class="mdi mdi-email-outline"></i> <a href="mailto:soporte@strokbig.com">soporte@strokbig.com</a></li>
+              <li><i class="mdi mdi-phone-outline"></i> <a href="tel:+573001234567">+57 300 123 4567</a></li>
+              <li><i class="mdi mdi-map-marker-outline"></i> <span>Medellín, Colombia</span></li>
+            </ul>
+          </div>
         </div>
-    </div>
-</section>
-
-<div class="services-block">
-    <h2 class="section-title">Servicios Adicionales</h2>
-    <div class="services-container">
-        <div class="service-card" onclick="showDetail('mantenimiento')">
-            <i class="mdi mdi-cog"></i>
-            <p>Mantenimiento</p>
+        <div class="footer-bottom">
+          <p>© 2025 Strokbig S.A.S - Todos los derechos reservados.</p>
         </div>
-        <div class="service-card" onclick="showDetail('redes')">
-            <i class="mdi mdi-access-point-network"></i>
-            <p>Redes</p>
-        </div>
-        <div class="service-card" onclick="showDetail('instalacion')">
-            <i class="mdi mdi-tools"></i>
-            <p>Instalación</p>
-        </div>
-        <div class="service-card" onclick="showDetail('soporte')">
-            <i class="mdi mdi-headphones"></i>
-            <p>Soporte Técnico</p>
-        </div>
-    </div>
-    <div id="mantenimiento" class="service-detail">
-        <h3>Mantenimiento de equipos</h3>
-        <p>Soluciones preventivas y correctivas para tus equipos.</p>
-        <div class="detail-grid">
-            <div class="detail-item"><i class="mdi mdi-speedometer"></i> Optimización de sistemas</div>
-            <div class="detail-item"><i class="mdi mdi-spray-bottle"></i> Limpieza física y lógica</div>
-            <div class="detail-item"><i class="mdi mdi-chip"></i> Reemplazo de piezas dañadas</div>
-            <div class="detail-item"><i class="mdi mdi-update"></i> Actualización de software</div>
-        </div>
-    </div>
-    <div id="redes" class="service-detail">
-        <h3>Redes</h3>
-        <p>Administración de redes con seguridad y rendimiento.</p>
-        <div class="detail-grid">
-            <div class="detail-item"><i class="mdi mdi-ethernet-cable-off"></i> Cableado estructurado</div>
-            <div class="detail-item"><i class="mdi mdi-router-wireless"></i> Configuración de routers</div>
-            <div class="detail-item"><i class="mdi mdi-wifi-lock"></i> Redes Wi-Fi seguras</div>
-            <div class="detail-item"><i class="mdi mdi-monitor-network"></i> Monitoreo de red</div>
-        </div>
-    </div>
-    <div id="instalacion" class="service-detail">
-        <h3>Instalación</h3>
-        <p>Implementación de hardware, software y servidores.</p>
-        <div class="detail-grid">
-            <div class="detail-item"><i class="mdi mdi-book-open-variant"></i> Software académico</div>
-            <div class="detail-item"><i class="mdi mdi-laptop"></i> Montaje de hardware</div>
-            <div class="detail-item"><i class="mdi mdi-server"></i> Configuración de servidores</div>
-            <div class="detail-item"><i class="mdi mdi-domain"></i> Infraestructura completa</div>
-        </div>
-    </div>
-    <div id="soporte" class="service-detail">
-        <h3>Soporte Técnico</h3>
-        <p>Acompañamiento en el uso de la plataforma y equipos.</p>
-        <div class="detail-grid">
-            <div class="detail-item"><i class="mdi mdi-monitor-share"></i> Atención remota</div>
-            <div class="detail-item"><i class="mdi mdi-truck-check-outline"></i> Soporte en sitio</div>
-            <div class="detail-item"><i class="mdi mdi-account-group"></i> Capacitación al personal</div>
-            <div class="detail-item"><i class="mdi mdi-fire-extinguisher"></i> Resolución rápida</div>
-        </div>
-    </div>
-</div>
-
-<script>
-    function showDetail(service) {
-        document.querySelectorAll('.service-detail').forEach(d => d.classList.remove('active'));
-        document.getElementById(service).classList.add('active');
-    }
-</script>
-
-
-    <div class="etdh-images">
-      <img src="assets/imagen1.png" alt="Pantalla de gestión académica">
-      <img src="assets/imagen2.png" alt="Pantalla virtual">
-    </div>
-  </section>
-
-  <!-- NAVBAR -->
-  <header>
-    <nav class="navbar" id="navbar">
-      <div class="logo" aria-hidden="false">
-        <!-- Imagen de siglas (visible al inicio) -->
-        <img src="assets/STBSiglas.png" alt="STB siglas" class="logo--siglas">
-        <!-- Imagen nombre completo (visible al hacer scroll) -->
-        <img src="assets/StrokbigNombrecompleto.png" alt="Strokbig nombre completo" class="logo--full">
       </div>
-      <ul class="nav-links">
-        <li><a href="index.html">INICIO</a></li>
-        <li><a href="ETH.html">SERVICIOS</a></li>
-        <li><a href="#">NOSOTROS</a></li>
-        <li><a href="#">CLIENTES</a></li>
-        <li><a href="#">CONTACTO</a></li>
-      </ul>
-      <a href="#" class="cta">Iniciar Sesión</a>
-    </nav>
+    </footer>
+
+    <script src="Script/Menu.js"></script>
     <script src="Script/ETH.js"></script>
-  </header>
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-top">
-        <div class="footer-about">
-          <img src="assets/StrokbigNombrecompleto.png" alt="Logo Strokbig" class="footer-logo">
-          <p class="footer-description">Soluciones tecnológicas innovadoras para la gestión académica y el desarrollo empresarial.</p>
-        </div>
-      <div class="footer-column footer-social">
-        <h3>Síguenos en Redes</h3>
-          <ul class="social-icons">
-            <li><a href="https://www.facebook.com/profile.php?id=61581199993425" aria-label="Visita nuestro Facebook" target="_blank"><i class="mdi mdi-facebook"></i></a></li>
-            <li><a href="https://www.instagram.com/strokbig_sistemas/?utm_source=ig_web_button_share_sheet" aria-label="Visita nuestro Instagram" target="_blank"><i class="mdi mdi-instagram"></i></a></li>
-            <li><a href="https://g.page/r/CSzTqpvqDcYNEBI/review" aria-label="Encuéntranos en Google Maps" target="_blank"><i class="mdi mdi-google-maps"></i></a></li>
-          </ul>
-      </div>
-      </div>
-      <hr class="footer-divider">
-      <div class="footer-links">
-        <div class="footer-column">
-          <h3>Navegación</h3>
-          <ul><li><a href="ETH.html">Servicios</a></li><li><a href="#">Nosotros</a></li><li><a href="#">Clientes</a></li><li><a href="#">Contacto</a></li></ul>
-        </div>
-        <div class="footer-column">
-          <h3>Soporte</h3>
-          <ul><li><a href="#">Centro de Ayuda</a></li><li><a href="#">Preguntas Frecuentes</a></li></ul>
-        </div>
-        <div class="footer-column">
-          <h3>Legal</h3>
-          <ul><li><a href="T&C.html">Términos y Condiciones</a></li><li><a href="PTD.html">Política de Privacidad</a></li></ul>
-        </div>
-        <div class="footer-column">
-          <h3>Contáctanos</h3>
-          <ul class="contact-list">
-            <li><i class="mdi mdi-email-outline"></i> <a href="mailto:soporte@strokbig.com">soporte@strokbig.com</a></li>
-            <li><i class="mdi mdi-phone-outline"></i> <a href="tel:+573001234567">+57 300 123 4567</a></li>
-            <li><i class="mdi mdi-map-marker-outline"></i> <span>Medellín, Colombia</span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2025 Strokbig S.A.S - Todos los derechos reservados.</p>
-      </div>
-    </div>
-  </footer>
 </body>
 </html>
