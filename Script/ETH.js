@@ -1,6 +1,27 @@
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
         
+        // --- LÓGICA PARA LA SUB-NAVEGACIÓN DE SERVICIOS ---
+        const navButtons = document.querySelectorAll('.services-nav-btn');
+        const contentGroups = document.querySelectorAll('.content-group');
+
+        if (navButtons.length > 0 && contentGroups.length > 0) {
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    contentGroups.forEach(group => {
+                        if (group.id === targetId) {
+                            group.classList.remove('hidden');
+                        } else {
+                            group.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        }
+        
         // --- LÓGICA PARA "POR QUÉ USAR ZEITPLAN" ---
         const featureCardsWrapper = document.querySelector('.feature-cards-wrapper');
         const desktopImagePanel = document.querySelector('.why-image-panel');
@@ -76,48 +97,38 @@
             const serviceCards = servicesContainer.querySelectorAll('.service-card');
             const defaultContent = document.getElementById('default-service-content');
             const dynamicContent = document.getElementById('dynamic-service-content');
-            const mobileMediaQuery = window.matchMedia('(max-width: 1200px)'); // Reutilizamos la media query
+            const mobileMediaQuery = window.matchMedia('(max-width: 1200px)');
             const detailsWrapper = document.getElementById('service-details-wrapper');
 
             const servicesData = {
                 mantenimiento: {
-                    title: "Mantenimiento de equipos",
-                    description: "Soluciones preventivas y correctivas para tus equipos.",
+                    title: "Mantenimiento de Computadores",
+                    description: "Aseguramos el óptimo rendimiento y la longevidad de tus mesas de trabajo con nuestros planes de mantenimiento preventivo y correctivo.",
                     subServices: [
-                        { icon: "mdi-speedometer", text: "Optimización de sistemas" },
-                        { icon: "mdi-brush-outline", text: "Limpieza física y lógica" },
-                        { icon: "mdi-swap-horizontal", text: "Reemplazo de piezas dañadas" },
-                        { icon: "mdi-update", text: "Actualización de software" }
-                    ]
-                },
-                redes: {
-                    title: "Redes",
-                    description: "Administración de redes con seguridad y rendimiento.",
-                    subServices: [
-                        { icon: "mdi-ethernet-cable", text: "Cableado estructurado" },
-                        { icon: "mdi-router-wireless-settings", text: "Configuración de routers" },
-                        { icon: "mdi-wifi-strength-3", text: "Redes Wi-Fi seguras" },
-                        { icon: "mdi-lan-check", text: "Monitoreo de red" }
-                    ]
-                },
-                instalacion: {
-                    title: "Instalación",
-                    description: "Implementación de hardware, software y servidores.",
-                    subServices: [
-                        { icon: "mdi-application-braces-outline", text: "Software académico" },
-                        { icon: "mdi-harddisk", text: "Montaje de hardware" },
-                        { icon: "mdi-server-network", text: "Configuración de servidores" },
-                        { icon: "mdi-puzzle-outline", text: "Infraestructura completa" }
+                        { icon: "mdi-speedometer", text: "Optimización de Rendimiento" },
+                        { icon: "mdi-virus-outline", text: "Limpieza de Virus y Malware" },
+                        { icon: "mdi-memory", text: "Actualización de Componentes" },
+                        { icon: "mdi-tools", text: "Diagnóstico y Reparación" }
                     ]
                 },
                 soporte: {
-                    title: "Soporte Técnico",
-                    description: "Acompañamiento en el uso de la plataforma y equipos.",
+                    title: "Soporte Técnico ante Incidencias",
+                    description: "Nuestro equipo de expertos está listo para resolver cualquier incidencia técnica, minimizando el tiempo de inactividad y garantizando la continuidad de tu operación.",
                     subServices: [
-                        { icon: "mdi-remote-desktop", text: "Atención remota" },
-                        { icon: "mdi-account-hard-hat-outline", text: "Soporte en sitio" },
-                        { icon: "mdi-account-group-outline", text: "Capacitación al personal" },
-                        { icon: "mdi-check-circle-outline", text: "Resolución rápida" }
+                        { icon: "mdi-remote-desktop", text: "Asistencia Remota Inmediata" },
+                        { icon: "mdi-account-hard-hat-outline", text: "Soporte en Sitio Programado" },
+                        { icon: "mdi-application-cog-outline", text: "Resolución de Fallas de Software" },
+                        { icon: "mdi-account-group-outline", text: "Capacitación a Usuarios" }
+                    ]
+                },
+                desarrolloWeb: {
+                    title: "Desarrollo Web",
+                    description: "Creamos soluciones web a medida que potencian tu marca, desde páginas corporativas hasta aplicaciones complejas y tiendas en línea.",
+                    subServices: [
+                        { icon: "mdi-web", text: "Páginas Web Corporativas" },
+                        { icon: "mdi-application-braces-outline", text: "Aplicaciones Web a Medida" },
+                        { icon: "mdi-cart-outline", text: "E-commerce y Tiendas Online" },
+                        { icon: "mdi-update", text: "Mantenimiento de Sitios" }
                     ]
                 }
             };
@@ -127,7 +138,6 @@
                     const targetKey = this.dataset.target;
                     const wasActive = this.classList.contains('active');
                     serviceCards.forEach(c => c.classList.remove('active'));
-                    
                     if (wasActive) {
                         defaultContent.classList.remove('hidden');
                         dynamicContent.classList.add('hidden');
@@ -147,15 +157,10 @@
                         `;
                         defaultContent.classList.add('hidden');
                         dynamicContent.classList.remove('hidden');
-
-                        // *** NUEVA FUNCIONALIDAD: SCROLL EN MÓVIL ***
                         if (mobileMediaQuery.matches) {
                             setTimeout(() => {
-                                detailsWrapper.scrollIntoView({
-                                    behavior: 'smooth',
-                                    block: 'center'
-                                });
-                            }, 100); // Pequeño delay para dar tiempo a que se renderice
+                                detailsWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }, 100);
                         }
                     }
                 });
