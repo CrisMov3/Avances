@@ -23,6 +23,10 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -56,6 +60,10 @@ header {
   top: 0;
   left: 0;
   z-index: 1000;
+}
+
+main {
+  padding-top: 110px;
 }
 
 .navbar {
@@ -172,6 +180,72 @@ header {
   display: none;
 }
 
+/* ============================================= */
+/* ===== SUB-NAVEGACIÓN DE SERVICIOS ===== */
+/* ============================================= */
+.services-nav-wrapper {
+  background-color: #f0f4f8;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.services-nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  background-color: var(--white-color);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.services-nav-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--mid-blue);
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.services-nav-btn:hover {
+  background-color: #f0f4f8;
+  color: var(--dark-blue);
+}
+
+.services-nav-btn.active {
+  background-color: #eef5fd;
+  color: #042a63;
+  border-color: #a4ccf1;
+  box-shadow: 0 2px 8px rgba(4, 42, 99, 0.1);
+}
+
+.services-nav-btn i {
+  font-size: 1.5rem;
+}
+
+.content-group {
+  display: block;
+  animation: fadeIn 0.6s ease;
+}
+
+.content-group.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* --- Botones --- */
 .btn {
   display: inline-block;
@@ -212,8 +286,7 @@ header {
 /* --- Sección Hero --- */
 #hero {
   background-color: var(--white-color);
-  padding-top: 180px;
-  padding-bottom: 80px;
+  padding: 80px 0;
   text-align: center;
 }
 
@@ -400,10 +473,9 @@ header {
   }
 }
 
-/* --- Grids y Tarjetas --- */
+/* --- Grids y Tarjetas Generales --- */
 .features-grid,
-.solution-grid,
-.pricing-grid {
+.solution-grid {
   display: grid;
   gap: 30px;
 }
@@ -443,8 +515,20 @@ header {
   margin-bottom: 10px;
 }
 
+/* Ajuste de padding para el título de la sección solution */
 #solution {
   background-color: var(--light-gray);
+  padding-top: 50px; /* Reduce el padding superior de la sección */
+}
+
+#solution .section-title {
+  margin-bottom: 15px; /* Reduce el margen inferior del título */
+  padding-top: 0; /* Asegura que el padding del título no lo separe más */
+}
+
+#solution .section-subtitle {
+  margin-top: 0;
+  margin-bottom: 30px; /* Ajusta el margen inferior si es necesario */
 }
 
 /* --- Sección Precios (Diseño Original) --- */
@@ -452,6 +536,8 @@ header {
   padding-top: 35px;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   align-items: center;
+  display: grid;
+  gap: 30px;
 }
 
 .pricing-card {
@@ -541,10 +627,12 @@ header {
 #additional-services {
   background-color: #f7f9fc;
   padding-bottom: 100px;
+  padding-top: 50px; /* Ajustado para que el título de esta sección también se vea mejor */
 }
 
 #additional-services .section-title {
   margin-bottom: 60px;
+  padding-top: 0; /* Ajustado */
 }
 
 .additional-services-grid {
@@ -811,9 +899,13 @@ header {
 }
 
 /* ============================================= */
-/* ================ MEDIA QUERIES ============== */
+/* =============== MEDIA QUERIES =============== */
 /* ============================================= */
 @media (max-width: 1200px) {
+  main {
+    padding-top: 90px;
+  }
+
   .hamburger-btn {
     display: flex;
     flex-direction: column;
@@ -922,6 +1014,15 @@ header {
   .why-text-content {
     min-width: auto;
   }
+
+  .services-nav {
+    flex-direction: column;
+  }
+
+  .services-nav-btn {
+    font-size: 1rem;
+    padding: 12px 15px;
+  }
 }
 
 @media (max-width: 800px) {
@@ -942,7 +1043,7 @@ header {
 
 @media (max-width: 700px) {
   #hero {
-    padding-top: 120px;
+    padding-top: 40px;
   }
 
   .hero-content h1 {
@@ -966,4 +1067,3 @@ header {
     font-size: 1rem;
   }
 }
-
