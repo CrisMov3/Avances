@@ -80,6 +80,7 @@ main.payment-main {
 
 .payment-card h3 { font-size: 1.6rem; color: var(--dark-blue); margin-bottom: 25px; text-align: center; }
 .payment-card label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--mid-blue); }
+.required-asterisk { color: var(--error-color); font-weight: bold; margin-left: 2px; } /* Estilo para el asterisco rojo */
 .payment-card input[type="text"], .payment-card input[type="number"] { width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; margin-bottom: 10px; transition: border-color 0.3s ease; }
 .payment-card input[type="text"]:focus, .payment-card input[type="number"]:focus { border-color: var(--text-dark-blue); outline: none; box-shadow: 0 0 0 2px rgba(4, 42, 99, 0.2); }
 .payment-card input[type="number"] { max-width: 150px; display: inline-block; margin-left: 10px; }
@@ -115,11 +116,29 @@ main.payment-main {
 .summary-item:last-child { border-bottom: none; }
 .summary-item span:first-child { color: #6b7280; }
 .summary-item strong { color: var(--dark-blue); font-size: 1.1rem; }
-.summary-item.penalty-details-summary.hidden { display: none; } /* Ocultar detalles de mora si no aplica */
+.summary-item.penalty-details-summary.hidden { display: none; } 
 .summary-item.penalty-details-summary span:first-child { color: var(--error-color); font-weight: 500; }
 .summary-item.penalty-details-summary strong { color: var(--error-color); }
 .summary-item.total-summary-final { border-top: 1px solid var(--border-color); margin-top: 10px; padding-top: 10px; font-weight: 700;}
 .summary-item.total-summary-final span:first-child { color: var(--dark-blue); }
+
+/* Estilo para el botón de descarga */
+.download-btn {
+    width: 100%;
+    margin-bottom: 30px; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--white-color); 
+    color: var(--text-dark-blue);
+    border: 2px solid var(--border-color);
+}
+.download-btn:hover {
+     background-color: #eef2f7;
+     border-color: #d1d5db;
+}
+.download-btn.hidden { display: none; }
 
 
 .payment-options { margin-bottom: 30px; }
@@ -180,4 +199,5 @@ main.payment-main {
     .total-summary { padding: 15px; }
     .summary-item { font-size: 0.9rem;}
     .summary-item strong { font-size: 1rem; }
+    .download-btn { margin-bottom: 20px; } 
 }
