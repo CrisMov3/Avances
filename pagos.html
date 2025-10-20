@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
     <header id="header">
@@ -39,11 +42,14 @@
 
     <div class="overlay" id="overlay"></div>
 
+    <img id="logo-for-pdf" src="assets/StrokbigNombrecompleto.png" alt="Logo Strokbig" style="display: none;" />
+
+
     <main class="payment-main">
         <section id="pagos-en-linea" class="section-padding">
             <div class="payment-container container">
                 <h2 class="section-title">Portal de Pagos</h2>
-                
+
                 <div class="payment-steps">
                     <div class="step-item active" id="step-indicator-1">
                         <div class="step-icon"><i class="mdi mdi-account-box-outline"></i></div>
@@ -61,27 +67,27 @@
 
                 <div class="payment-card active" id="payment-step-1">
                     <h3>Bienvenido al portal de pagos de Strokbig</h3>
-                    <label for="document-number">Ingresa tu número de documento</label>
-                    <input type="text" id="document-number" placeholder="Número de identificación">
+                    <label for="document-number">Ingresa tu número de documento O referencia de pago <span class="required-asterisk">*</span></label>
+                    <input type="text" id="document-number" placeholder="Número de identificación o Factura ID (ej: SB-MA01)">
                     <p class="input-description">Requerimos tus datos para validar tu identidad y gestionar tu pago.</p>
                     <button class="btn btn-primary" id="btn-next-step-1">Siguiente <i class="mdi mdi-check"></i></button>
-                    <p id="id-error" class="error-message" style="display: none;">Por favor, ingresa un número de identificación.</p>
+                    <p id="id-error" class="error-message" style="display: none;">Por favor, ingresa un número de identificación o referencia válido.</p>
                 </div>
 
                 <div class="payment-card hidden" id="payment-step-2">
                     <h3 id="payment-step-2-greeting">Hola Usuario,</h3>
-                    
+
                     <div id="invoice-selector-container" style="display: none;">
                         <div class="select-all-container">
                             <input type="checkbox" id="select-all-invoices">
                             <label for="select-all-invoices">Seleccionar Todas las Facturas</label>
                         </div>
                         <p>Selecciona la(s) factura(s) que deseas pagar:</p>
-                        <div id="invoice-options-list"> 
+                        <div id="invoice-options-list">
                             </div>
                     </div>
 
-                    <div id="payment-summary-container" class="hidden"> 
+                    <div id="payment-summary-container" class="hidden">
                         <div class="total-summary">
                             <h4>Resumen de Pago</h4>
                             <div class="summary-item">
@@ -92,7 +98,7 @@
                                 <span>Subtotal Base:</span>
                                 <span id="selected-base-amount">$ 0</span>
                             </div>
-                             <div class="summary-item penalty-details-summary hidden">
+                            <div class="summary-item penalty-details-summary hidden">
                                 <span>Tasa Interés Aplicada (Diaria):</span>
                                 <span id="interest-rate-details"></span>
                             </div>
@@ -100,12 +106,16 @@
                                 <span>Total Mora Calculada:</span>
                                 <strong id="selected-penalty-amount">$ 0</strong>
                             </div>
-                             <div class="summary-item total-summary-final">
+                            <div class="summary-item total-summary-final">
                                 <span>Total a Pagar:</span>
                                 <strong id="selected-total-amount">$ 0</strong>
                             </div>
                         </div>
-                       
+
+                       <button class="btn btn-secondary download-btn hidden" id="download-invoice-btn">
+                           <i class="mdi mdi-download-outline"></i> Descargar Factura(s)
+                       </button>
+
                         <div class="payment-options">
                             <h4>Selecciona el valor a pagar:</h4>
                             <div class="radio-option">
@@ -122,8 +132,8 @@
                             <button class="btn btn-primary btn-pay" data-method="PSE"><i class="mdi mdi-bank"></i> Pagar con PSE</button>
                             <button class="btn btn-primary btn-pay" data-method="Bancolombia"><i class="mdi mdi-credit-card"></i> Pagar con Bancolombia</button>
                         </div>
-                    </div> 
-                    
+                    </div>
+
                     <a href="#" id="cancel-payment" class="cancel-link">Volver</a>
                 </div>
 
@@ -137,70 +147,73 @@
                         <div class="receipt-item"><span>Fecha de pago:</span> <span id="receipt-date"></span></div>
                         <div class="receipt-item"><span>Referencia:</span> <span id="receipt-ref"></span></div>
                     </div>
-                    <button class="btn btn-secondary" id="btn-finish-payment">Finalizar</button>
+                    <button class="btn btn-secondary download-btn" id="download-receipt-btn">
+                         <i class="mdi mdi-download-outline"></i> Descargar Recibo
+                    </button>
+                    <button class="btn btn-secondary" id="btn-finish-payment" style="margin-top: 15px;">Finalizar</button>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <div class="footer-container">
-          <div class="footer-top">
-            <div class="footer-about">
-              <img src="assets/StrokbigNombrecompleto.png" alt="Logo Strokbig" class="footer-logo">
-              <p class="footer-description">
-                Soluciones tecnológicas innovadoras para la gestión académica y el desarrollo empresarial.
-              </p>
-            </div>
-            <div class="footer-column footer-social">
-            <h3>Síguenos en Redes</h3>
-              <ul class="social-icons">
-                <li><a href="https://www.facebook.com/profile.php?id=61581199993425" aria-label="Visita nuestro Facebook" target="_blank"><i class="mdi mdi-facebook"></i></a></li>
-                <li><a href="https://www.instagram.com/strokbig_sistemas/?utm_source=ig_web_button_share_sheet" aria-label="Visita nuestro Instagram" target="_blank"><i class="mdi mdi-instagram"></i></a></li>
-                <li><a href="https://g.page/r/CSzTqpvqDcYNEBI/review" aria-label="Encuéntranos en Google Maps" target="_blank"><i class="mdi mdi-google-maps"></i></a></li>
-              </ul>
-            </div>
+      <div class="footer-container">
+        <div class="footer-top">
+          <div class="footer-about">
+            <img src="assets/StrokbigNombrecompleto.png" alt="Logo Strokbig" class="footer-logo">
+            <p class="footer-description">
+              Soluciones tecnológicas innovadoras para la gestión académica y el desarrollo empresarial.
+            </p>
           </div>
-          <div class="footer-links">
-            <div class="footer-column">
-              <h3>Navegación</h3>
-              <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="ETH.html">Servicios</a></li>
-                <li><a href="#">Nosotros</a></li>
-                <li><a href="#">Clientes</a></li>
-                <li><a href="#">Contacto</a></li>
-              </ul>
-            </div>
-            <div class="footer-column">
-              <h3>Soporte</h3>
-              <ul>
-                <li><a href="#">Centro de Ayuda</a></li>
-                <li><a href="#">Preguntas Frecuentes</a></li>
-                <li><a href="#">Reportar un Problema</a></li>
-              </ul>
-            </div>
-            <div class="footer-column">
-              <h3>Legal</h3>
-              <ul>
-                <li><a href="T&C.html">Términos y Condiciones</a></li>
-                <li><a href="PTD.html">Política de Privacidad</a></li>
-              </ul>
-            </div>
-            <div class="footer-column">
-              <h3>Contáctanos</h3>
-              <ul class="contact-list">
-                <li><i class="mdi mdi-email-outline"></i> <a href="mailto:soporte@strokbig.com">soporte@strokbig.com</a></li>
-                <li><i class="mdi mdi-phone-outline"></i> <a href="tel:+573001234567">+57 300 123 4567</a></li>
-                <li><i class="mdi mdi-map-marker-outline"></i> <span>Medellín, Colombia</span></li>
-              </ul>
-            </div>
-          </div>
-          <div class="footer-bottom">
-            <p>© 2025 Strokbig S.A.S - Todos los derechos reservados.</p>
+          <div class="footer-column footer-social">
+          <h3>Síguenos en Redes</h3>
+            <ul class="social-icons">
+              <li><a href="https://www.facebook.com/profile.php?id=61581199993425" aria-label="Visita nuestro Facebook" target="_blank"><i class="mdi mdi-facebook"></i></a></li>
+              <li><a href="https://www.instagram.com/strokbig_sistemas/?utm_source=ig_web_button_share_sheet" aria-label="Visita nuestro Instagram" target="_blank"><i class="mdi mdi-instagram"></i></a></li>
+              <li><a href="https://g.page/r/CSzTqpvqDcYNEBI/review" aria-label="Encuéntranos en Google Maps" target="_blank"><i class="mdi mdi-google-maps"></i></a></li>
+            </ul>
           </div>
         </div>
-      </footer>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Navegación</h3>
+            <ul>
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="ETH.html">Servicios</a></li>
+              <li><a href="#">Nosotros</a></li>
+              <li><a href="#">Clientes</a></li>
+              <li><a href="#">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Soporte</h3>
+            <ul>
+              <li><a href="#">Centro de Ayuda</a></li>
+              <li><a href="#">Preguntas Frecuentes</a></li>
+              <li><a href="#">Reportar un Problema</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="T&C.html">Términos y Condiciones</a></li>
+              <li><a href="PTD.html">Política de Privacidad</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contáctanos</h3>
+            <ul class="contact-list">
+              <li><i class="mdi mdi-email-outline"></i> <a href="mailto:soporte@strokbig.com">soporte@strokbig.com</a></li>
+              <li><i class="mdi mdi-phone-outline"></i> <a href="tel:+573001234567">+57 300 123 4567</a></li>
+              <li><i class="mdi mdi-map-marker-outline"></i> <span>Medellín, Colombia</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 Strokbig S.A.S - Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
 
     <script src="Script/Menu.js"></script>
     <script src="Script/pagos.js"></script>
