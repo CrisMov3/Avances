@@ -2,7 +2,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         const paymentSection = document.getElementById('pagos-en-linea');
         if (paymentSection) {
-            // Elementos de la UI
+            // --- Elementos UI ---
             const step1 = document.getElementById('payment-step-1');
             const step2 = document.getElementById('payment-step-2');
             const step3 = document.getElementById('payment-step-3');
@@ -17,60 +17,71 @@
             const stepIndicators = document.querySelectorAll('.step-item');
             const greetingElement = document.getElementById('payment-step-2-greeting');
             const invoiceSelectorContainer = document.getElementById('invoice-selector-container');
-            const paymentDetailsContainer = document.getElementById('payment-details-container');
-            const invoiceStatusElement = document.querySelector('.invoice-header .status');
-            const penaltyDetailsElement = document.getElementById('penalty-details'); 
-            const penaltyAmountElement = document.getElementById('penalty-amount'); 
-            const baseAmountElement = document.getElementById('base-amount'); 
+            const invoiceOptionsList = document.getElementById('invoice-options-list'); 
+            const paymentSummaryContainer = document.getElementById('payment-summary-container'); 
+            const selectAllCheckbox = document.getElementById('select-all-invoices');
+            const selectedBaseAmountEl = document.getElementById('selected-base-amount');
+            const selectedPenaltyAmountEl = document.getElementById('selected-penalty-amount');
+            const selectedTotalAmountEl = document.getElementById('selected-total-amount');
+            const selectedInvoicesCountEl = document.getElementById('selected-invoices-count');
+            const totalSelectedAmountLabelEl = document.getElementById('total-selected-amount-label');
+            const penaltyDetailsSummaryItems = document.querySelectorAll('.penalty-details-summary'); // Nodos para detalles de mora
+            const interestRateDetailsEl = document.getElementById('interest-rate-details');
 
-            // --- Constantes ---
-            const PENALTY_AMOUNT = 50000;
+            // --- Constantes y Datos ---
+            const RATE_NATURAL = 0.075; // 7.5% diario
+            const RATE_JURIDICA = 0.15; // 15% diario
 
-            // --- Datos simulados de usuarios con fechas ---
             const userData = {
-                "1001": {
-                    name: "StrokBig",
+                "1001": { 
+                    name: "StrokBig", 
+                    type: "juridica", 
                     invoices: [
-                        { id: "SB-MA01", concept: "Mantenimiento Preventivo Q3", amount: 1500000, dueDate: "05 Oct 2025" },
-                        { id: "SB-MA02", concept: "Licencia Software X", amount: 2000000, dueDate: "10 Nov 2025" },
-                        { id: "SB-MA03", concept: "Soporte Técnico Octubre", amount: 500000, dueDate: "15 Nov 2025" },
-                        { id: "SB-MA04", concept: "Desarrollo Módulo Y", amount: 1000000, dueDate: "01 Sep 2025" }
-                    ]
+                        { id: "SB-MA01", concept: "Mantenimiento Preventivo Q3", amount: 1500000, dueDate: "2025-10-05" }, 
+                        { id: "SB-MA02", concept: "Licencia Software X", amount: 2000000, dueDate: "2025-11-10" }, 
+                        { id: "SB-MA03", concept: "Soporte Técnico Octubre", amount: 500000, dueDate: "2025-11-15" }, 
+                        { id: "SB-MA04", concept: "Desarrollo Módulo Y", amount: 1000000, dueDate: "2025-09-01" } 
+                    ] 
                 },
-                "2002": {
-                    name: "Cristian Lopez",
+                "2002": { 
+                    name: "Cristian Lopez", 
+                    type: "natural", 
                     invoices: [
-                        { id: "SB-CL02", concept: "Consultoría Inicial", amount: 2000000, dueDate: "25 Nov 2025" }
-                    ]
+                        { id: "SB-CL02", concept: "Consultoría Inicial", amount: 2000000, dueDate: "2025-11-25" } 
+                    ] 
                 }
             };
-            let currentUser = null;
-            let selectedInvoiceData = null;
+            let currentUser = null; 
+            let processedInvoices = []; 
 
             // --- Funciones Auxiliares ---
-            const formatCurrency = (value) => `$ ${value.toLocaleString('es-CO')}`;
+            const formatCurrency = (value) => `$ ${Math.round(value).toLocaleString('es-CO')}`; // Redondea para evitar decimales extraños por interés
+            const formatPercentage = (rate) => `${(rate * 100).toFixed(1)}%`;
 
-            const isOverdue = (dueDateString) => {
-                const months = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
-                const parts = dueDateString.split(" ");
-                if (parts.length !== 3) return false; 
-                const day = parseInt(parts[0], 10);
-                const monthIndex = months.findIndex(m => parts[1].toLowerCase().startsWith(m));
-                const year = parseInt(parts[2], 10);
-                if (isNaN(day) || monthIndex === -1 || isNaN(year)) return false;
-                const dueDate = new Date(year, monthIndex, day);
+            const getDaysOverdue = (dueDateString) => {
+                const dueDate = new Date(dueDateString + "T00:00:00"); 
                 const today = new Date();
                 today.setHours(0, 0, 0, 0);
                 dueDate.setHours(0,0,0,0);
-                return dueDate < today;
+                if (dueDate >= today) return 0;
+                const diffTime = today - dueDate;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays;
             };
 
-            const processInvoices = (invoices) => {
+            const processInvoices = (invoices, userType) => {
                 return invoices.map(invoice => {
-                    const overdue = isOverdue(invoice.dueDate);
-                    const totalAmount = overdue ? invoice.amount + PENALTY_AMOUNT : invoice.amount;
-                    const status = overdue ? "EN MORA" : "PENDIENTE";
-                    return { ...invoice, totalAmount, status, isOverdue: overdue };
+                    const daysOverdue = getDaysOverdue(invoice.dueDate);
+                    let penalty = 0;
+                    const status = daysOverdue > 0 ? "EN MORA" : "PENDIENTE";
+                    
+                    if (daysOverdue > 0) {
+                        const dailyRate = userType === 'natural' ? RATE_NATURAL : RATE_JURIDICA;
+                        penalty = invoice.amount * dailyRate * daysOverdue; 
+                    }
+                    const totalAmount = invoice.amount + penalty; // Suma base + penalidad calculada
+                    
+                    return { ...invoice, totalAmount, status, isOverdue: daysOverdue > 0, penalty, daysOverdue };
                 });
             };
 
@@ -96,10 +107,10 @@
             // --- Lógica Principal ---
             btnNextStep1.addEventListener('click', () => {
                 const enteredId = docInput.value.trim();
-                selectedInvoiceData = null;
-                invoiceSelectorContainer.innerHTML = '<p>Selecciona la factura que deseas pagar:</p>';
-                paymentDetailsContainer.classList.add('hidden');
-                invoiceSelectorContainer.style.display = 'none';
+                processedInvoices = []; 
+                invoiceOptionsList.innerHTML = ''; 
+                paymentSummaryContainer.classList.add('hidden'); 
+                selectAllCheckbox.checked = false; 
 
                 if (enteredId === '') {
                     idError.textContent = 'Por favor, ingresa un número de identificación.';
@@ -107,93 +118,112 @@
                     currentUser = null;
                 } else if (userData[enteredId]) {
                     idError.style.display = 'none';
-                    currentUser = {
-                        ...userData[enteredId],
-                        processedInvoices: processInvoices(userData[enteredId].invoices)
-                    };
+                    currentUser = userData[enteredId];
+                    processedInvoices = processInvoices(currentUser.invoices, currentUser.type); 
+                    
                     greetingElement.textContent = `Hola ${currentUser.name},`;
 
-                    if (currentUser.processedInvoices.length > 1) {
-                        invoiceSelectorContainer.style.display = 'block';
-                        paymentDetailsContainer.classList.add('hidden');
-                        currentUser.processedInvoices.forEach((invoice, index) => {
+                    if (processedInvoices.length > 0) {
+                        invoiceSelectorContainer.style.display = 'block'; 
+                        document.querySelector('.select-all-container').style.display = processedInvoices.length > 1 ? 'flex' : 'none';
+
+                        processedInvoices.forEach((invoice, index) => {
                             const optionDiv = document.createElement('div');
                             optionDiv.className = 'invoice-option';
                             optionDiv.innerHTML = `
-                                <input type="radio" id="invoice-${index}" name="invoice-selection" value="${index}">
+                                <input type="checkbox" id="invoice-${index}" name="invoice-selection" value="${index}" data-amount="${invoice.amount}" data-penalty="${invoice.penalty}" data-total="${invoice.totalAmount}" data-is-overdue="${invoice.isOverdue}">
                                 <label for="invoice-${index}">
                                     <span class="invoice-details-summary">
                                         Factura ${invoice.id} - ${invoice.concept} 
-                                        (<span class="status-${invoice.status.toLowerCase().replace(' ', '-')}">${invoice.status}</span>)
+                                        (<span class="status-${invoice.status.toLowerCase().replace(' ', '-')}">${invoice.status}</span> ${invoice.isOverdue ? ` - ${invoice.daysOverdue} días` : ''})
                                     </span>
-                                    <span class="invoice-amount">${formatCurrency(invoice.totalAmount)}</span>
+                                    <span class="invoice-amount">${formatCurrency(invoice.totalAmount)} ${invoice.isOverdue ? '<i class="mdi mdi-alert-circle" style="color:var(--error-color); font-size: 1.1em;" title="Incluye mora"></i>' : ''}</span>
                                 </label>
                             `;
-                            invoiceSelectorContainer.appendChild(optionDiv);
+                            invoiceOptionsList.appendChild(optionDiv);
                         });
-                        invoiceSelectorContainer.removeEventListener('change', handleInvoiceSelection);
-                        invoiceSelectorContainer.addEventListener('change', handleInvoiceSelection);
-                    } else if (currentUser.processedInvoices.length === 1) {
-                        invoiceSelectorContainer.style.display = 'none';
-                        selectedInvoiceData = currentUser.processedInvoices[0];
-                        populatePaymentDetails();
-                        paymentDetailsContainer.classList.remove('hidden');
+                        invoiceOptionsList.removeEventListener('change', updatePaymentSummary); // Limpiar listener
+                        invoiceOptionsList.addEventListener('change', updatePaymentSummary);
+                        selectAllCheckbox.removeEventListener('change', handleSelectAll); // Limpiar listener
+                        selectAllCheckbox.addEventListener('change', handleSelectAll);
                     } else {
                         invoiceSelectorContainer.style.display = 'block';
-                        invoiceSelectorContainer.innerHTML = '<p>No tienes facturas pendientes de pago.</p>';
-                        paymentDetailsContainer.classList.add('hidden');
+                        document.querySelector('.select-all-container').style.display = 'none';
+                        invoiceOptionsList.innerHTML = '<p>No tienes facturas pendientes de pago.</p>';
                     }
                     showStep(step2);
 
                 } else {
-                    idError.textContent = 'Numero de identificación invalido';
+                    idError.textContent = 'Numero de identificación invalido'; 
                     idError.style.display = 'block';
                     currentUser = null;
                 }
             });
-            
-            function handleInvoiceSelection(event) {
-                if (event.target.name === 'invoice-selection') {
-                    const selectedIndex = parseInt(event.target.value);
-                    selectedInvoiceData = currentUser.processedInvoices[selectedIndex];
-                    populatePaymentDetails();
-                    paymentDetailsContainer.classList.remove('hidden');
+
+            function handleSelectAll() {
+                const isChecked = selectAllCheckbox.checked;
+                const invoiceCheckboxes = invoiceOptionsList.querySelectorAll('input[name="invoice-selection"]');
+                invoiceCheckboxes.forEach(checkbox => {
+                    checkbox.checked = isChecked;
+                    checkbox.closest('.invoice-option').classList.toggle('selected', isChecked);
+                });
+                updatePaymentSummary(); 
+            }
+
+            function updatePaymentSummary() {
+                const selectedCheckboxes = invoiceOptionsList.querySelectorAll('input[name="invoice-selection"]:checked');
+                let subtotalBase = 0;
+                let totalPenalty = 0;
+                let totalSelectedAmount = 0;
+                let selectedCount = 0;
+                let hasOverdueSelected = false;
+
+                invoiceOptionsList.querySelectorAll('.invoice-option').forEach(opt => {
+                     const checkbox = opt.querySelector('input[type="checkbox"]');
+                     opt.classList.toggle('selected', checkbox.checked);
+                });
+
+                selectedCheckboxes.forEach(checkbox => {
+                    subtotalBase += parseFloat(checkbox.dataset.amount);
+                    totalPenalty += parseFloat(checkbox.dataset.penalty);
+                    totalSelectedAmount += parseFloat(checkbox.dataset.total);
+                    selectedCount++;
+                    if (checkbox.dataset.isOverdue === 'true') {
+                        hasOverdueSelected = true;
+                    }
+                });
+
+                if (selectedCount > 0) {
+                    selectedBaseAmountEl.textContent = formatCurrency(subtotalBase);
+                    selectedPenaltyAmountEl.textContent = formatCurrency(totalPenalty);
+                    selectedTotalAmountEl.textContent = formatCurrency(totalSelectedAmount);
+                    selectedInvoicesCountEl.textContent = selectedCount;
+                    totalSelectedAmountLabelEl.textContent = formatCurrency(totalSelectedAmount);
+
+                    // Mostrar/ocultar detalles de mora
+                    if (hasOverdueSelected) {
+                        const rate = currentUser.type === 'natural' ? RATE_NATURAL : RATE_JURIDICA;
+                        interestRateDetailsEl.textContent = formatPercentage(rate);
+                        penaltyDetailsSummaryItems.forEach(el => el.classList.remove('hidden'));
+                    } else {
+                        penaltyDetailsSummaryItems.forEach(el => el.classList.add('hidden'));
+                    }
+                    
+                    paymentSummaryContainer.classList.remove('hidden');
+
+                     const allCheckboxes = invoiceOptionsList.querySelectorAll('input[name="invoice-selection"]');
+                     selectAllCheckbox.checked = selectedCount === allCheckboxes.length && allCheckboxes.length > 0;
+
+                } else {
+                    paymentSummaryContainer.classList.add('hidden'); 
+                    selectAllCheckbox.checked = false; 
                 }
+                
+                document.getElementById('pago-total-seleccionado').checked = true;
+                partialAmountInput.disabled = true;
+                partialAmountInput.value = '';
             }
-
-            // *** FUNCIÓN ACTUALIZADA PARA POBLAR DETALLES ***
-            function populatePaymentDetails() {
-                 if (!selectedInvoiceData) return;
-                 document.getElementById('invoice-number-display').textContent = selectedInvoiceData.id;
-                 document.getElementById('invoice-concept').textContent = selectedInvoiceData.concept;
-                 
-                 // Mostrar valor base
-                 baseAmountElement.textContent = formatCurrency(selectedInvoiceData.amount);
-
-                 // Mostrar/Ocultar y llenar detalles de mora
-                 if (selectedInvoiceData.isOverdue) {
-                     penaltyAmountElement.textContent = formatCurrency(PENALTY_AMOUNT);
-                     penaltyDetailsElement.style.display = 'flex'; // Usar flex para que se alinee
-                 } else {
-                     penaltyDetailsElement.style.display = 'none'; // Ocultar si no hay mora
-                 }
-                 
-                 // Mostrar valor total
-                 const formattedTotal = formatCurrency(selectedInvoiceData.totalAmount);
-                 document.getElementById('total-due').textContent = formattedTotal;
-                 document.getElementById('total-amount-label').textContent = formattedTotal;
-                 document.getElementById('due-date').textContent = selectedInvoiceData.dueDate;
-
-                 // Actualizar estado visualmente
-                 invoiceStatusElement.textContent = selectedInvoiceData.status;
-                 invoiceStatusElement.className = `status status-${selectedInvoiceData.status.toLowerCase().replace(' ', '-')}`;
-
-                 document.getElementById('pago-total').checked = true;
-                 partialAmountInput.disabled = true;
-                 partialAmountInput.value = '';
-            }
-
-
+            
             paymentAmountRadios.forEach(radio => {
                 radio.addEventListener('change', () => {
                     partialAmountInput.disabled = !document.getElementById('pago-parcial').checked;
@@ -204,26 +234,38 @@
 
             paymentButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    if (!currentUser || !selectedInvoiceData) return;
+                    const selectedCheckboxes = invoiceOptionsList.querySelectorAll('input[name="invoice-selection"]:checked');
+                    if (selectedCheckboxes.length === 0 || !currentUser) {
+                        alert("Por favor, selecciona al menos una factura para pagar.");
+                        return;
+                    }
 
                     const method = this.dataset.method;
-                    let amountPaid = '';
-                    let amountValue = selectedInvoiceData.totalAmount; 
+                    let totalToPay = 0;
+                    let selectedInvoiceIds = [];
+                    
+                    selectedCheckboxes.forEach(checkbox => {
+                         const index = parseInt(checkbox.value);
+                         const invoice = processedInvoices[index];
+                         totalToPay += invoice.totalAmount;
+                         selectedInvoiceIds.push(`${invoice.id}${invoice.isOverdue ? ' (Mora)' : ''}`); // Añadir (Mora) al ID en el recibo
+                    });
+
+                    let amountValue = totalToPay; 
 
                     if (document.getElementById('pago-parcial').checked && partialAmountInput.value) {
                         amountValue = parseFloat(partialAmountInput.value.replace(/[^0-9]/g, '')) || 0;
-                        if (amountValue > selectedInvoiceData.totalAmount || amountValue <= 0) {
-                            alert(`El valor ingresado (${amountValue > 0 ? formatCurrency(amountValue) : '0'}) debe ser mayor a cero y no puede ser mayor al total pendiente (${formatCurrency(selectedInvoiceData.totalAmount)}).`);
+                        if (amountValue > totalToPay || amountValue <= 0) {
+                            alert(`El valor ingresado (${amountValue > 0 ? formatCurrency(amountValue) : '0'}) debe ser mayor a cero y no puede ser mayor al total seleccionado (${formatCurrency(totalToPay)}).`);
                             return;
                         }
                     }
-                    amountPaid = `COP ${amountValue.toLocaleString('es-CO')}`;
+                    const amountPaidFormatted = `COP ${amountValue.toLocaleString('es-CO')}`;
 
                     showStep(step3);
                     
-                    document.getElementById('receipt-invoice').textContent = selectedInvoiceData.id;
-                    document.getElementById('receipt-concept').textContent = selectedInvoiceData.concept + (selectedInvoiceData.isOverdue ? ' (+ Cargo por Mora)' : ''); 
-                    document.getElementById('receipt-amount').textContent = amountPaid;
+                    document.getElementById('receipt-invoices').textContent = selectedInvoiceIds.join(', '); 
+                    document.getElementById('receipt-amount').textContent = amountPaidFormatted;
                     document.getElementById('receipt-method').textContent = method;
                     document.getElementById('receipt-date').textContent = new Date().toLocaleDateString('es-CO', { day: 'numeric', month: 'short', year: 'numeric'});
                     document.getElementById('receipt-ref').textContent = `#${Math.floor(Math.random() * 9000000) + 1000000}`;
@@ -235,20 +277,22 @@
                 showStep(step1);
                 docInput.value = '';
                 currentUser = null;
-                selectedInvoiceData = null;
-                invoiceSelectorContainer.innerHTML = '<p>Selecciona la factura que deseas pagar:</p>';
-                paymentDetailsContainer.classList.add('hidden');
+                processedInvoices = [];
+                invoiceOptionsList.innerHTML = '';
+                paymentSummaryContainer.classList.add('hidden');
                 invoiceSelectorContainer.style.display = 'none';
+                selectAllCheckbox.checked = false;
             });
 
             btnFinishPayment.addEventListener('click', () => {
                 showStep(step1);
                 docInput.value = '';
                 currentUser = null;
-                selectedInvoiceData = null;
-                invoiceSelectorContainer.innerHTML = '<p>Selecciona la factura que deseas pagar:</p>';
-                paymentDetailsContainer.classList.add('hidden');
+                processedInvoices = [];
+                invoiceOptionsList.innerHTML = '';
+                paymentSummaryContainer.classList.add('hidden');
                 invoiceSelectorContainer.style.display = 'none';
+                selectAllCheckbox.checked = false;
             });
             
             showStep(step1);
