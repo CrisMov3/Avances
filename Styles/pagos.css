@@ -16,6 +16,7 @@
     --text-light: #adb5bd;
     --text-dark-blue: #042a63;
     --error-color: #ef4444; /* Rojo para mora y errores */
+    --warning-color: #f59e0b; /* Amarillo/Naranja para pendiente */
 }
 
 /* --- Estilos Base para pagos.html --- */
@@ -26,7 +27,7 @@ body {
     line-height: 1.6;
 }
 main.payment-main {
-    padding-top: 0px; 
+    padding-top: 30px; 
     padding-bottom: 0px;
 }
 .container {
@@ -80,7 +81,7 @@ main.payment-main {
 
 .payment-card h3 { font-size: 1.6rem; color: var(--dark-blue); margin-bottom: 25px; text-align: center; }
 .payment-card label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--mid-blue); }
-.required-asterisk { color: var(--error-color); font-weight: bold; margin-left: 2px; } /* Estilo para el asterisco rojo */
+.required-asterisk { color: var(--error-color); font-weight: bold; margin-left: 2px; } 
 .payment-card input[type="text"], .payment-card input[type="number"] { width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; margin-bottom: 10px; transition: border-color 0.3s ease; }
 .payment-card input[type="text"]:focus, .payment-card input[type="number"]:focus { border-color: var(--text-dark-blue); outline: none; box-shadow: 0 0 0 2px rgba(4, 42, 99, 0.2); }
 .payment-card input[type="number"] { max-width: 150px; display: inline-block; margin-left: 10px; }
@@ -98,15 +99,93 @@ main.payment-main {
 .select-all-container label { margin-bottom: 0; font-weight: 600; color: var(--dark-blue); cursor: pointer; }
 
 #invoice-selector-container p { font-weight: 600; margin-bottom: 15px; color: var(--dark-blue); text-align: left; }
-.invoice-option { display: flex; align-items: center; background-color: var(--light-gray); padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--border-color); cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease; }
+
+/* Estilos de Acordeón de Facturas */
+.invoice-group {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    background-color: var(--white-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+.invoice-group-header {
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--white-color);
+    transition: background-color 0.3s ease;
+}
+.invoice-group-header:hover {
+    background-color: #f8fafc;
+}
+.invoice-group-header span {
+    font-weight: 600;
+    color: var(--dark-blue);
+}
+.invoice-group-header .invoice-group-status {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--mid-blue);
+    padding-left: 10px;
+}
+.invoice-group-header .invoice-group-status.en-mora {
+    color: var(--error-color);
+}
+.invoice-group-header i {
+    font-size: 1.5rem;
+    color: var(--text-dark-blue);
+    transition: transform 0.3s ease-out;
+}
+.invoice-group-header.open i {
+    transform: rotate(180deg);
+}
+
+.installment-list {
+    padding: 0 20px; /* Padding lateral se mantiene */
+    background-color: #fdfdfd;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding-top 0.4s ease-out, padding-bottom 0.4s ease-out; /* Transición de padding y max-height */
+}
+.installment-list.open {
+    max-height: 500px; 
+    padding: 10px 20px 20px 20px; /* Padding completo cuando está abierto */
+}
+/* Fin Estilos de Acordeón */
+
+
+.invoice-option { display: flex; align-items: flex-start; background-color: var(--light-gray); padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--border-color); cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease; }
 .invoice-option:hover { background-color: #eef5fd; }
 .invoice-option.selected { background-color: #dbeafe; border-color: var(--text-dark-blue); }
-.invoice-option input[type="checkbox"] { margin-right: 15px; accent-color: var(--text-dark-blue); width: 18px; height: 18px; cursor: pointer; }
-.invoice-option label { margin-bottom: 0; font-weight: 500; cursor: pointer; flex-grow: 1; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-.invoice-option .invoice-details-summary { font-size: 0.9rem; color: var(--mid-blue); }
-.invoice-option .invoice-details-summary .status-pendiente { color: #d97706; font-weight: 600;}
+.invoice-option input[type="checkbox"] { margin-right: 15px; accent-color: var(--text-dark-blue); width: 18px; height: 18px; cursor: pointer; margin-top: 4px; flex-shrink: 0;}
+.invoice-option label { margin-bottom: 0; font-weight: 500; cursor: pointer; flex-grow: 1; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 5px 15px; }
+.invoice-option .invoice-details-summary { font-size: 0.9rem; color: var(--mid-blue); line-height: 1.4; flex-basis: 70%; }
+.invoice-option .invoice-details-summary .status-pendiente { color: var(--warning-color); font-weight: 600;}
 .invoice-option .invoice-details-summary .status-en-mora { color: var(--error-color); font-weight: 600; }
-.invoice-option .invoice-amount { font-weight: 600; color: var(--dark-blue); }
+.invoice-option .invoice-amount { font-weight: 600; color: var(--dark-blue); white-space: nowrap; }
+.invoice-option .invoice-installment-info { font-size: 0.8rem; color: #6b7280; flex-basis: 100%; margin-top: 2px; }
+
+/* Aviso de Mora */
+.late-fee-notice {
+    font-size: 0.85rem;
+    color: var(--mid-blue);
+    background-color: #fffbeb; 
+    border: 1px solid #fef3c7;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.late-fee-notice i {
+    color: #f59e0b; 
+    font-size: 1.2rem;
+}
+
 
 /* Contenedor de Resumen y Pago */
 #payment-summary-container.hidden { display: none; } 
@@ -179,7 +258,7 @@ main.payment-main {
 /* ============================================= */
 /* ===== RESPONSIVE PARA PAGOS             ===== */
 /* ============================================= */
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
     main.payment-main { padding-top: 0px; } 
     .section-padding { padding: 30px 0; }
     .section-title { font-size: 2rem; margin-bottom: 30px; }
