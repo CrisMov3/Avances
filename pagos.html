@@ -20,8 +20,8 @@
       <nav class="navbar" id="navbar">
         <div class="logo" aria-hidden="false">
           <a href="index.html">
-            <img src="assets/STBSiglas.png" alt="STB siglas" class="logo--siglas">
-            <img src="assets/StrokbigNombrecompleto.png" alt="Strokbig nombre completo" class="logo--full">
+            <img src="assets/new/STROKBIG-ISOTIPO-VANILLA.png" alt="STB siglas" class="logo--siglas">
+            <img src="assets/new/Strokbig-Logo-Vanilla-[NO-MR].png" alt="Strokbig nombre completo" class="logo--full">
           </a>
         </div>
         <ul class="nav-links" id="nav-menu">
@@ -42,14 +42,14 @@
 
     <div class="overlay" id="overlay"></div>
 
-    <img id="logo-for-pdf" src="assets/StrokbigNombrecompleto.png" alt="Logo Strokbig" style="display: none;" />
+    <img id="logo-for-pdf" src="assets/new/Strokbig-Logo-Vanilla-[NO-MR].png" alt="Logo Strokbig" style="display: none;" />
 
 
     <main class="payment-main">
         <section id="pagos-en-linea" class="section-padding">
             <div class="payment-container container">
                 <h2 class="section-title">Portal de Pagos</h2>
-
+                
                 <div class="payment-steps">
                     <div class="step-item active" id="step-indicator-1">
                         <div class="step-icon"><i class="mdi mdi-account-box-outline"></i></div>
@@ -76,22 +76,26 @@
 
                 <div class="payment-card hidden" id="payment-step-2">
                     <h3 id="payment-step-2-greeting">Hola Usuario,</h3>
-
+                    
                     <div id="invoice-selector-container" style="display: none;">
-                        <div class="select-all-container">
+                        <div class="select-all-container" style="display: none;">
                             <input type="checkbox" id="select-all-invoices">
-                            <label for="select-all-invoices">Seleccionar Todas las Facturas</label>
+                            <label for="select-all-invoices">Seleccionar Todas las Cuotas</label>
                         </div>
-                        <p>Selecciona la(s) factura(s) que deseas pagar:</p>
-                        <div id="invoice-options-list">
+                        <p>Selecciona la(s) factura(s) o cuota(s) que deseas pagar:</p>
+                        <div id="invoice-options-list"> 
                             </div>
+                        <p id="late-fee-notice" class="late-fee-notice" style="display: none;">
+                            <i class="mdi mdi-alert-circle-outline"></i>
+                            Recuerda que superar la fecha límite de pago genera intereses de mora.
+                        </p>
                     </div>
 
-                    <div id="payment-summary-container" class="hidden">
+                    <div id="payment-summary-container" class="hidden"> 
                         <div class="total-summary">
                             <h4>Resumen de Pago</h4>
                             <div class="summary-item">
-                                <span>Facturas Seleccionadas:</span>
+                                <span>Cuota(s) Seleccionada(s):</span>
                                 <span id="selected-invoices-count">0</span>
                             </div>
                             <div class="summary-item">
@@ -111,9 +115,9 @@
                                 <strong id="selected-total-amount">$ 0</strong>
                             </div>
                         </div>
-
+                       
                        <button class="btn btn-secondary download-btn hidden" id="download-invoice-btn">
-                           <i class="mdi mdi-download-outline"></i> Descargar Factura(s)
+                           <i class="mdi mdi-download-outline"></i> Descargar Detalle
                        </button>
 
                         <div class="payment-options">
@@ -132,8 +136,8 @@
                             <button class="btn btn-primary btn-pay" data-method="PSE"><i class="mdi mdi-bank"></i> Pagar con PSE</button>
                             <button class="btn btn-primary btn-pay" data-method="Bancolombia"><i class="mdi mdi-credit-card"></i> Pagar con Bancolombia</button>
                         </div>
-                    </div>
-
+                    </div> 
+                    
                     <a href="#" id="cancel-payment" class="cancel-link">Volver</a>
                 </div>
 
@@ -141,7 +145,7 @@
                     <h3><i class="mdi mdi-check-decagram"></i> ¡Pago Exitoso!</h3>
                     <p>Gracias por tu pago. Aquí tienes los detalles de tu transacción:</p>
                     <div class="receipt-details">
-                        <div class="receipt-item"><span>Facturas pagadas:</span> <strong id="receipt-invoices"></strong></div>
+                        <div class="receipt-item"><span>Factura(s)/Cuota(s) pagada(s):</span> <strong id="receipt-invoices"></strong></div>
                         <div class="receipt-item"><span>Valor pagado:</span> <strong id="receipt-amount"></strong></div>
                         <div class="receipt-item"><span>Método de pago:</span> <span id="receipt-method"></span></div>
                         <div class="receipt-item"><span>Fecha de pago:</span> <span id="receipt-date"></span></div>
@@ -160,7 +164,7 @@
       <div class="footer-container">
         <div class="footer-top">
           <div class="footer-about">
-            <img src="assets/StrokbigNombrecompleto.png" alt="Logo Strokbig" class="footer-logo">
+            <img src="assets/new/Strokbig-Logo-Vanilla-[NO-MR].png" alt="Logo Strokbig" class="footer-logo">
             <p class="footer-description">
               Soluciones tecnológicas innovadoras para la gestión académica y el desarrollo empresarial.
             </p>
