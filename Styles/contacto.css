@@ -14,7 +14,7 @@
     --background-section-alt: var(--white-color);
     --text-dark-blue: #042a63;
     --heading-color: #111827;
-    --navbar-height: 50px; /* Adjust */
+    --navbar-height: 30px; /* Adjust */
     --success-color: #10b981;
     --error-color: #ef4444;
 }
@@ -272,4 +272,5 @@ body {
     .closing-box { padding: 30px; }
     .closing-box h3 { font-size: 1.3rem; }
     .closing-box p { font-size: 1rem; }
+
 }
