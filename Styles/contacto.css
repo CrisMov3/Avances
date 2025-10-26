@@ -1,0 +1,275 @@
+/* --- Basic Reset & Variables --- */
+:root {
+    --primary-color: #F97316;
+    --primary-hover: #EA580C;
+    --dark-blue: #0F172A;
+    --mid-blue: #1e3a8a;
+    --light-gray: #F1F5F9; /* Main background */
+    --white-color: #FFFFFF; /* Alt background */
+    --border-color: #E2E8F0;
+    --font-family: 'Poppins', sans-serif;
+    --text-color: #475569;
+    --link-color: #1e3a8a;
+    --background-light: #f1f5f9;
+    --background-section-alt: var(--white-color);
+    --text-dark-blue: #042a63;
+    --heading-color: #111827;
+    --navbar-height: 50px; /* Adjust */
+    --success-color: #10b981;
+    --error-color: #ef4444;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-light);
+    color: var(--text-color);
+    line-height: 1.7;
+    font-size: 16px;
+    padding-top: var(--navbar-height);
+}
+
+.container {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* --- General Section Styles --- */
+.contact-main { overflow-x: hidden; }
+.section-padding { padding: 80px 0; }
+.alt-v3-background { background-color: var(--background-section-alt); } /* Use white */
+
+/* --- Section 1: Header --- */
+.contact-header {
+    background: linear-gradient(135deg, var(--dark-blue), var(--mid-blue));
+    color: var(--white-color);
+    text-align: center;
+    padding: 70px 20px 60px 20px;
+    position: relative;
+    z-index: 1;
+}
+.contact-header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.contact-header p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #cbd5e1;
+    opacity: 0.9;
+}
+
+/* --- Section 2: Content Grid --- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Info column, Form column wider */
+    gap: 60px; /* Increased gap */
+    align-items: flex-start; /* Align columns at the top */
+}
+
+/* Column 1: Info */
+.contact-info-col h2 {
+    font-size: 1.8rem;
+    color: var(--heading-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+.contact-intro-text p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+.contact-details {
+    margin-top: 40px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 30px;
+}
+.details-title {
+    font-size: 1.3rem;
+    color: var(--heading-color);
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+.detail-item {
+    display: flex;
+    align-items: flex-start; /* Align icon top */
+    margin-bottom: 25px;
+    gap: 20px;
+}
+.detail-item i {
+    font-size: 1.8rem;
+    color: var(--link-color); /* Orange icon */
+    margin-top: 3px; /* Align icon nicely */
+}
+.detail-item h4 {
+    font-size: 1rem;
+    color: var(--heading-color);
+    margin-bottom: 3px;
+    font-weight: 600;
+}
+.detail-item p, .detail-item a {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    text-decoration: none;
+    line-height: 1.5;
+}
+.detail-item a:hover {
+    color: blue;
+}
+
+
+/* Column 2: Form */
+.contact-form-card {
+    background-color: var(--white-color);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 30, 80, 0.08);
+    border: 1px solid var(--border-color);
+}
+.contact-form-card h3 {
+    font-size: 1.6rem;
+    color: var(--heading-color);
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--mid-blue);
+}
+.form-group .required { color: var(--error-color); margin-left: 2px; }
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: var(--font-family);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--link-color);
+    box-shadow: 0 0 0 3px rgba(22, 173, 249, 0.2);
+}
+.form-group textarea {
+    resize: vertical; /* Allow vertical resize only */
+    min-height: 120px;
+}
+.btn-submit-contact {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: var(--text-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.btn-submit-contact:hover {
+    background-color: var(--text-dark-blue);
+    transform: translateY(-2px);
+}
+
+/* Form Status Message Styling */
+.form-status-message {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 10px;
+    border-radius: 4px;
+    display: none; /* Hidden by default */
+}
+.form-status-message.success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+    display: block;
+}
+.form-status-message.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+    display: block;
+}
+
+
+/* --- Section 3: Closing Message --- */
+.closing-box {
+    background-color: var(--white-color); /* White background */
+    padding: 40px;
+    border-radius: 10px;
+    border-left: 5px solid var(--text-color); /* Orange border */
+    box-shadow: 0 6px 20px rgba(0, 30, 80, 0.06);
+    text-align: center;
+    position: relative;
+    max-width: 900px; /* Limit width */
+    margin: 0 auto; /* Center */
+}
+.closing-icon {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    display: block;
+}
+.closing-box h3 {
+    font-size: 1.5rem;
+    color: var(--heading-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+.closing-box p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    line-height: 1.8;
+}
+
+/* --- Optional Section 4: Map --- */
+.contact-map {
+    margin-top: 0; /* No margin if it's the last element */
+    line-height: 0; /* Remove potential whitespace below iframe */
+}
+.contact-map iframe {
+    display: block; /* Ensure it behaves like a block */
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1250px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* Stack columns */
+        gap: 50px;
+    }
+    .contact-form-col {
+        order: -1; /* Form first on tablet/mobile */
+    }
+    .contact-info-col h2 { text-align: center; }
+    .contact-intro-text p { text-align: center; }
+}
+
+@media (max-width: 768px) {
+    .section-padding { padding: 60px 0; }
+    .contact-header h1 { font-size: 2.2rem; }
+    .contact-header p { font-size: 1.1rem; }
+    .contact-form-card { padding: 30px; }
+    .closing-box { padding: 30px; }
+    .closing-box h3 { font-size: 1.3rem; }
+    .closing-box p { font-size: 1rem; }
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strokbig</title>
+    <link rel="stylesheet" href="Styles/Menu.css">
+    <link rel="stylesheet" href="Styles/contacto.css"> 
+    <link rel="shortcut icon" href="assets/new/STROKBIG-ISOTIPO-VANILLA.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+</head>
+<body>
+    <header id="header">
+      <nav class="navbar" id="navbar">
+        <div class="logo" aria-hidden="false">
+          <a href="index.html">
+            <img src="assets/new/STB-ISOTIPO-[NM]-Vanilla-[NO-MR].png" alt="STB siglas" class="logo--siglas">
+            <img src="assets/new/Strokbig-Logo-Vanilla-[NO-MR].png" alt="Strokbig nombre completo" class="logo--full">
+          </a>
+        </div>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="index.html">INICIO</a></li>
+          <li><a href="ETH.html">SERVICIOS</a></li>
+          <li><a href="pagos.html">PAGOS EN LÍNEA</a></li>
+          <li><a href="nosotros.html">NOSOTROS</a></li>
+          <li><a href="#">CLIENTES</a></li>
+          <li><a href="contacto.html">CONTACTO</a></li> <li class="nav-links__cta-mobile"><a href="#" class="cta">Iniciar Sesión</a></li>
+        </ul>
+        <a href="#" class="cta cta-desktop">Iniciar Sesión</a>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </header>
+    <div class="overlay" id="overlay"></div>
+
+    <main class="contact-main">
+
+        <section class="contact-header">
+            <div class="container">
+                <h1>Contáctanos</h1>
+                <p>Estamos aquí para ayudarte a construir soluciones tecnológicas eficientes, seguras y personalizadas.</p>
+            </div>
+        </section>
+
+        <section class="contact-content section-padding">
+            <div class="container contact-grid">
+
+                <div class="contact-info-col">
+                    <div class="contact-intro-text">
+                        <h2>¿Tienes un proyecto en mente?</h2>
+                        <p>En Strokbig creemos en la importancia de una comunicación directa y transparente. Ya sea soporte técnico, mantenimiento, desarrollo a medida o asistencia con tu proyecto académico, nuestro equipo está listo para brindarte una respuesta rápida y profesional.</p>
+                        <p>También puedes escribirnos si deseas formar parte de nuestros proyectos o conocer más sobre <strong>Zeitplan</strong>.</p>
+                    </div>
+
+                    <div class="contact-details">
+                        <h3 class="details-title">Información de Contacto</h3>
+                        <div class="detail-item">
+                            <i class="mdi mdi-email-outline"></i>
+                            <div>
+                                <h4>Correo Electrónico</h4>
+                                <a href="mailto:contacto@strokbig.com">contacto@strokbig.com</a>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="mdi mdi-phone-outline"></i>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <a href="tel:+573214567890">+57 321 456 7890</a> </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="mdi mdi-clock-time-four-outline"></i>
+                            <div>
+                                <h4>Horario de Atención</h4>
+                                <p>Lunes a Viernes<br>8:00 a.m. – 6:00 p.m.</p>
+                            </div>
+                        </div>
+                         <div class="detail-item">
+                            <i class="mdi mdi-map-marker-outline"></i>
+                            <div>
+                                <h4>Ubicación</h4>
+                                <p>Medellín, Colombia</p>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-col">
+                    <div class="contact-form-card">
+                        <h3>Envíanos tu mensaje</h3>
+                        <form action="api/enviar_correo.php" method="POST" id="contact-form">
+                            <div class="form-group">
+                                <label for="nombre_completo">Nombre completo <span class="required">*</span></label>
+                                <input type="text" id="nombre_completo" name="nombre_completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="correo_electronico">Correo electrónico <span class="required">*</span></label>
+                                <input type="email" id="correo_electronico" name="correo_electronico" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="asunto">Asunto <span class="required">*</span></label>
+                                <input type="text" id="asunto" name="asunto" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mensaje">Mensaje <span class="required">*</span></label>
+                                <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-submit-contact">Enviar mensaje</button>
+                            <p id="form-status" class="form-status-message"></p>
+                        </form>
+                    </div>
+                </div>
+
+            </div> </section>
+
+        <section class="contact-closing section-padding alt-v3-background">
+             <div class="container closing-box">
+                <i class="mdi mdi-lightbulb-on-outline closing-icon"></i>
+                <h3>Tu proyecto es nuestra prioridad.</h3>
+                <p>En Strokbig trabajamos cada día para ofrecerte soluciones tecnológicas confiables, eficientes y adaptadas a tus necesidades. Escríbenos y juntos construiremos el siguiente paso de tu evolución digital.</p>
+            </div>
+        </section>
+
+        </main>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-top">
+          <div class="footer-about">
+            <img src="assets/new/Strokbig-Logo-BICOLOR-[B]-+-[MR].png" alt="Logo Strokbig" class="footer-logo">
+            <p class="footer-description">
+              Soluciones tecnológicas innovadoras para la gestión académica y el desarrollo empresarial.
+            </p>
+          </div>
+          <div class="footer-column footer-social">
+          <h3>Síguenos en Redes</h3>
+            <ul class="social-icons">
+              <li><a href="https://www.facebook.com/profile.php?id=61581199993425" aria-label="Visita nuestro Facebook" target="_blank"><i class="mdi mdi-facebook"></i></a></li>
+              <li><a href="https://www.instagram.com/strokbig_sistemas/?utm_source=ig_web_button_share_sheet" aria-label="Visita nuestro Instagram" target="_blank"><i class="mdi mdi-instagram"></i></a></li>
+              <li><a href="https://g.page/r/CSzTqpvqDcYNEBI/review" aria-label="Encuéntranos en Google Maps" target="_blank"><i class="mdi mdi-google-maps"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Navegación</h3>
+            <ul>
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="ETH.html">Servicios</a></li>
+              <li><a href="nosotros.html">Nosotros</a></li>
+              <li><a href="#">Clientes</a></li>
+              <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Soporte</h3>
+            <ul>
+              <li><a href="#">Centro de Ayuda</a></li>
+              <li><a href="#">Preguntas Frecuentes</a></li>
+              <li><a href="#">Reportar un Problema</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="T&C.html">Términos y Condiciones</a></li>
+              <li><a href="PTD.html">Política de Privacidad</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contáctanos</h3>
+            <ul class="contact-list">
+              <li><i class="mdi mdi-email-outline"></i> <a href="mailto:soporte@strokbig.com">soporte@strokbig.com</a></li>
+              <li><i class="mdi mdi-phone-outline"></i> <a href="tel:+573214567890">+57 321 456 7890</a></li> <li><i class="mdi mdi-map-marker-outline"></i> <span>Medellín, Colombia</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 Strokbig S.A.S - Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+    <div id="modal-proximamente" class="modal-overlay hidden">
+        <div class="modal-content-simple">
+            <button class="modal-close-btn" id="modal-close-btn" aria-label="Cerrar">&times;</button>
+            <i class="mdi mdi-tools"></i>
+            <h3>Sección en Construcción</h3>
+            <p>¡Estamos trabajando en esta sección para traerte más novedades muy pronto!</p>
+        </div>
+    </div>
+    <a href="#" id="scroll-to-top" class="scroll-to-top-btn" aria-label="Volver arriba">
+        <i class="mdi mdi-arrow-up-thick"></i>
+    </a>
+    <script src="Script/Menu.js"></script>
+    <script src="Script/contacto.js"></script>
+    </body>
+</html>
