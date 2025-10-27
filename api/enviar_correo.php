@@ -28,15 +28,15 @@ $asunto_prefijo = "Contacto interesado STB";
 
 // --- Configuración SMTP (Gmail - Usa Contraseña de Aplicación) ---
 $smtp_host = 'smtp.gmail.com';
-$smtp_username = 'cristian.lopez@strokbig.com'; // TU CORREO DE GMAIL/WORKSPACE
-$smtp_password = 'xjfwjlmoxvgesdli';        // TU CONTRASEÑA DE APLICACIÓN DE 16 DÍGITOS
+$smtp_username = 'strokbigofficial@gmail.com'; // TU CORREO DE GMAIL/WORKSPACE
+$smtp_password = 'eycvxtrtvhpyqlrv';        // TU CONTRASEÑA DE APLICACIÓN DE 16 DÍGITOS
 $smtp_secure = PHPMailer::ENCRYPTION_SMTPS; // O ENCRYPTION_STARTTLS
 $smtp_port = 465;                           // 465 para SMTPS, 587 para STARTTLS
 
 // --- Configuración del Remitente Fijo ---
-$nombre_remitente_fijo = "Sección Contacto Strokbig";
+$nombre_remitente_fijo = "Notificaciones Strokbig";
 // Usa un correo VERIFICADO en tu cuenta SMTP o uno genérico si tu servidor lo permite
-$correo_remitente_fijo = "zeitplanofficial@gmail.com"; // Puede ser el mismo que el de autenticación
+$correo_remitente_fijo = "strokbigofficial@gmail.com"; // Puede ser el mismo que el de autenticación
 
 // --- URL del Logo (¡REEMPLAZA ESTA URL con la URL pública!) ---
 $url_logo = "URL_COMPLETA_DE_TU_LOGO"; // Ejemplo: https://www.strokbig.com/logo_email.png
